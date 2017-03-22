@@ -1,0 +1,16 @@
+<div class="tweet-popup-directive">
+      	<div ng-repeat="tweet in parent_tweets | orderBy: 'created_at'">
+					<div class="parent-tweet">
+						<tweet ng-model="tweet" ng-click="changeTarget(tweet)" />
+					</div>
+				</div>
+				<div class="target-tweet">
+					<tweet ng-model="target_tweet" />
+					<div class="row">
+						<input type="text" class="col-sm-offset-1 col-sm-11 new-text" placeholder="comment" ng-model="text" ng-keyup="$event.keyCode == 13 ? addTweet(target_tweet, text) : null">
+					</div>
+				</div>
+				<div ng-repeat="tweet in child_tweets | orderBy:'created_at'" >
+					<tweet-block target-tweet="tweet" tweets="tweets" change-target="changeTarget"/>
+			  </div>
+</div>	

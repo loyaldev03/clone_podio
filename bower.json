@@ -1,0 +1,14 @@
+{
+  "name": "starter-node-angular",
+  "version": "1.0.0",
+  "dependencies": {
+    "angular": "^1.6.2",
+    "angular-route": "^1.6.2",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "angular-ui-router": "^0.4.2",
+    "satellizer": "^0.15.5",
+    "angular-socket-io": "^0.7.0",
+    "angular-bootstrap": "^2.5.0"
+  }
+}

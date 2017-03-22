@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>Flapper News</title>
+    <link href="libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="stylesheets/style.css" rel="stylesheet">
+
+    <script src="libs/angular/angular.min.js"></script>
+    <script src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="libs/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="libs/satellizer/dist/satellizer.min.js"></script>
+		<!-- Socket.io -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+		<script type="text/javascript" src="libs/angular-socket-io/socket.min.js"></script>
+
+    <script src="/javascripts/angularApp.js"></script>
+    <script src="/javascripts/controllers/login.js"></script>
+    <script src="/javascripts/controllers/account.js"></script>
+    <script src="/javascripts/controllers/page.js"></script>
+    <script src="/javascripts/controllers/twitter_account.js"></script>
+    <script src="/javascripts/controllers/twitter_popup.js"></script>
+    <script src="/javascripts/directives/post-directive.js"></script>
+    <script src="/javascripts/directives/tweet-directive.js"></script>
+    <script src="/javascripts/directives/tweet-block-directive.js"></script>
+    <script src="/javascripts/services/manage_fb_account.js"></script>
+    <script src="/javascripts/services/manage_tw_account.js"></script>
+    <script src="/javascripts/services/socket.js"></script>
+    <style> .glyphicon-thumbs-up { cursor:pointer } </style>
+  </head>
+  <body ng-app="fb-tw-integration">
+  	<ui-view></ui-view>
+  </body>
+</html>

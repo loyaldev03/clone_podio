@@ -1,0 +1,15 @@
+<div class="container">
+	<h1> {{account_info.name}}   Account </h1>
+	<div class="row">
+		<select class="page-selector" ng-init="selectedPage = pages[0]" ng-options="page as page.name for page in pages" ng-model="selectedPage" ng-change="changePage()"></select>
+
+		<div class="row page-view">
+			<h1> {{full_page_info.name}} </h1>
+			<div class="row">
+				<div ng-repeat="post in posts | orderBy:'-created'" >
+					<post ng-model="post" />
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>

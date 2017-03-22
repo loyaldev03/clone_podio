@@ -1,0 +1,85 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.mentions{
+	padding-left: 100px;
+}
+
+.post-title {
+	margin-bottom: 50px;
+}
+
+.post-comments {
+	padding-left: 50px;
+}
+
+.comment-message {
+
+}
+
+.mention-message {
+
+}
+
+.post-directive {
+	border: 1px solid black;
+	background-color: rgb(230,230,230);
+	padding: 20px 20px;
+	margin-bottom: 20px;
+}
+
+.new-comment {
+	margin-top:20px;
+	height: 34px;
+}
+
+.new-mention {
+	margin-top:10px;
+	height: 34px;
+}
+
+.container > h1 {
+	text-align: center;
+}
+
+.page-selector {
+  width: 200px;
+  height: 50px;
+  font-size: 20px;
+}
+
+.tweet-directive {
+	margin: 10px 30px 10px 30px;
+}
+
+.tweet-block {
+	border-top: 1px solid black;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.parent-tweet {
+	border-bottom: 1px solid black;
+}
+
+.row {
+	margin-left: 0px;
+	margin-right: 0px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.new-text {
+	height: 35px;
+}
+
+.tweet-wrapper {
+	border:1px solid black;
+	padding: 10px 10px 10px 10px;
+}

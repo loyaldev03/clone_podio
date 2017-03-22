@@ -1,0 +1,25 @@
+{
+  "name": "social-inte",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.16.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.0",
+    "ejs": "~2.5.5",
+    "everyauth": "^0.4.9",
+    "express": "^4.14.1",
+    "fbgraph": "^1.4.1",
+    "https": "^1.0.0",
+    "mongoose": "^4.8.5",
+    "morgan": "~1.7.0",
+    "promise": "^7.1.1",
+    "querystring": "^0.2.0",
+    "request": "^2.80.0",
+    "serve-favicon": "~2.3.2",
+    "socket.io": "^1.7.3"
+  }
+}

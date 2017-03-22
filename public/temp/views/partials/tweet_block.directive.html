@@ -1,0 +1,5 @@
+<div class="tweet-block row">
+	<div ng-repeat="tweet in conversation_tweets | orderBy:'created_at'" >
+		<tweet ng-model="tweet" ng-click="changeTarget(tweet)"/>
+	</div>
+</div>
