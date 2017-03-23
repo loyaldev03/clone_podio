@@ -120,14 +120,8 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                         files: [
                             'assets/global/plugins/highcharts/js/highcharts.js',
                             // 'assets/global/plugins/highcharts/js/highcharts-3d.js',
-                            'assets/global/plugins/highcharts/js/highcharts-more.js',
                             'assets/global/plugins/highcharts/js/modules/solid-gauge.js',
                             // 'assets/global/plugins/jquery.sparkline.min.js',
-
-                            'assets/global/plugins/morris/morris.css',                            
-                            'assets/global/plugins/morris/morris.min.js',
-                            'assets/global/plugins/morris/raphael-min.js',                            
-                            'assets/global/plugins/jquery.sparkline.min.js',
 
                             'js/scripts/dashboard.js',
                             'js/controllers/DashboardController.js',
