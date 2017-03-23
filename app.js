@@ -8,17 +8,6 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var https = require('https');
 
-var mongoose = require('mongoose');
-require('./models/Users');
-require('./models/Accounts');
-require('./models/Pages');
-require('./models/Posts');
-require('./models/Comments');
-require('./models/Mentions');
-require('./models/TweetAccounts');
-require('./models/Tweets');
-mongoose.connect('mongodb://localhost/manage_fb_tw');
-	
 var index = require('./routes/index');
 var users = require('./routes/users');
 
