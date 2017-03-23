@@ -55,8 +55,14 @@
         <div class="col-md-4 col-sm-12">
             <!-- BEGIN PORTLET-->
             <div class="portlet light bordered ">
+                <div class="portlet-title">
+                    <div class="caption caption-md">
+                        <i class="icon-bar-chart font-green"></i>
+                        <span class="caption-subject font-green bold">Under Contracts (10 deals)</span>
+                    </div>
+                </div>
                 <div class="portlet-body">
-<!--                     <div id="highchart_1" class="portlet-body-morris-fit morris-chart" style="height: 260px"> </div> -->
+                     <div id="under_contract" style="height: 260px"> </div>
                 </div>
             </div>
             <!-- END PORTLET-->
@@ -64,8 +70,14 @@
         <div class="col-md-4 col-sm-12">
             <!-- BEGIN PORTLET-->
             <div class="portlet light bordered ">
+                <div class="portlet-title">
+                    <div class="caption caption-md">
+                        <i class="icon-bar-chart font-green"></i>
+                        <span class="caption-subject font-green bold">Offers Made (100)</span>
+                    </div>
+                </div>
                 <div class="portlet-body">
-                    <div id="highchart_2" class="portlet-body-morris-fit morris-chart" style="height: 260px"> </div>
+                    <div id="offers_made" style="height: 260px"> </div>
                 </div>
             </div>
             <!-- END PORTLET-->
@@ -182,17 +194,14 @@
         <div class="col-md-4 col-sm-12">
             <!-- BEGIN PORTLET-->
             <div class="portlet light bordered ">
-                <div class="portlet-body">
-                    <div id="highchart_1" class="portlet-body-morris-fit morris-chart" style="height: 260px"> </div>
+                <div class="portlet-title">
+                    <div class="caption caption-md">
+                        <i class="icon-bar-chart font-green"></i>
+                        <span class="caption-subject font-green bold">Closed (10 deals)</span>
+                    </div>
                 </div>
-            </div>
-            <!-- END PORTLET-->
-        </div>
-        <div class="col-md-4 col-sm-12">
-            <!-- BEGIN PORTLET-->
-            <div class="portlet light bordered ">
                 <div class="portlet-body">
-                    <div id="highchart_2" class="portlet-body-morris-fit morris-chart" style="height: 260px"> </div>
+                    <div id="closed" style="height: 260px"> </div>
                 </div>
             </div>
             <!-- END PORTLET-->
@@ -203,7 +212,22 @@
                 <div class="portlet-title">
                     <div class="caption caption-md">
                         <i class="icon-bar-chart font-green"></i>
-                        <span class="caption-subject font-green bold uppercase">Tasks Due Today</span>
+                        <span class="caption-subject font-green bold">Offers Accepted (20)</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div id="offers_accepted" style="height: 260px"> </div>
+                </div>
+            </div>
+            <!-- END PORTLET-->
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <!-- BEGIN PORTLET-->
+            <div class="portlet light bordered ">
+                <div class="portlet-title">
+                    <div class="caption caption-md">
+                        <i class="icon-bar-chart font-green"></i>
+                        <span class="caption-subject font-green bold uppercase">Tasks Due Today </span>
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -245,8 +269,19 @@
         <div class="col-md-4 col-sm-12">
             <!-- BEGIN PORTLET-->
             <div class="portlet light bordered ">
-                <div class="portlet-body">
-                    <div id="highchart_1" class="portlet-body-morris-fit morris-chart" style="height: 260px"> </div>
+                <div class="portlet-title">
+                    <div class="caption caption-md">
+                        <i class="icon-bar-chart font-green"></i>
+                        <span class="caption-subject font-green bold uppercase">Work Progress</span>
+                    </div>
+                </div>
+                <div class="portlet-bodycol-sm-12" style="height: 260px">
+                    <div class="col-md-6">
+			
+                    </div>
+                    <div class="col-md-6">
+                        <div id="work_progress" style="height: 260px"> </div>
+                    </div>
                 </div>
             </div>
             <!-- END PORTLET-->
@@ -379,5 +414,10 @@
 <!-- BEGIN MAIN JS & CSS -->
 <script>
     Dashboard.init();   
+    Dashboard.drawCharts('#under_contract', 75);
+    Dashboard.drawCharts('#offers_made', 50);
+    Dashboard.drawCharts('#closed', 10);
+    Dashboard.drawCharts('#offers_accepted', 25);
+    Dashboard.drawCharts('#work_progress', 50);
 </script>
 <!-- BEGIN MAIN JS & CSS -->
