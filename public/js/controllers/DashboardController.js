@@ -25,10 +25,19 @@ angular.module('MetronicApp').controller('DashboardController', function($rootSc
     }
 
     $scope.tasks_due_today = [
-    	{tasks_name: "first_task", workspace_name: "first_workspace"},
-    	{tasks_name: "second_task", workspace_name: "second_workspace"},
-    	{tasks_name: "third_task", workspace_name: "third_workspace"},
-    	{tasks_name: "fourth_task", workspace_name: "fourth_workspace"},
-    	{tasks_name: "fifth_task", workspace_name: "fifth_workspace"}
+    	{task_name: "first_task", workspace_name: "first_workspace"},
+    	{task_name: "second_task", workspace_name: "second_workspace"},
+    	{task_name: "third_task", workspace_name: "third_workspace"},
+    	{task_name: "fourth_task", workspace_name: "fourth_workspace"},
+    	{task_name: "fifth_task", workspace_name: "fifth_workspace"}
     ];
+
+    $scope.tasks_past_due = [
+    	{task_name: "first_task", workspace_name: "first_workspace", due_date: "3-3-2016"},
+    	{task_name: "second_task", workspace_name: "second_workspace", due_date: "5-5-2016"},
+    	{task_name: "third_task", workspace_name: "third_workspace", due_date: "1-6-2016"},
+    	{task_name: "fourth_task", workspace_name: "fourth_workspace", due_date: "4-5-2016"},
+    	{task_name: "fifth_task", workspace_name: "fifth_workspace", due_date: "8-1-2016"}
+    ];
+
 });

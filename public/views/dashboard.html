@@ -84,78 +84,93 @@
                         <table class="table table-hover table-light">
                             <thead>
                                 <tr class="uppercase">
-                                    <th colspan="2"> MEMBER </th>
-                                    <th> Earnings </th>
-                                    <th> CASES </th>
-                                    <th> CLOSED </th>
-                                    <th> RATE </th>
+                                    <th> Classified </th>
+                                    <th> Number </th>
                                 </tr>
                             </thead>
-                            <tr>
-                                <td class="fit">
-                                    <img class="user-pic rounded" src="../assets/pages/media/users/avatar4.jpg"> </td>
-                                <td>
-                                    <a href="javascript:;" class="primary-link">Brain</a>
-                                </td>
-                                <td> $345 </td>
-                                <td> 45 </td>
-                                <td> 124 </td>
-                                <td>
-                                    <span class="bold font-green">80%</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="fit">
-                                    <img class="user-pic rounded" src="../assets/pages/media/users/avatar5.jpg"> </td>
-                                <td>
-                                    <a href="javascript:;" class="primary-link">Nick</a>
-                                </td>
-                                <td> $560 </td>
-                                <td> 12 </td>
-                                <td> 24 </td>
-                                <td>
-                                    <span class="bold font-green">67%</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="fit">
-                                    <img class="user-pic rounded" src="../assets/pages/media/users/avatar5.jpg"> </td>
-                                <td>
-                                    <a href="javascript:;" class="primary-link">Nick</a>
-                                </td>
-                                <td> $560 </td>
-                                <td> 12 </td>
-                                <td> 24 </td>
-                                <td>
-                                    <span class="bold font-green">67%</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="fit">
-                                    <img class="user-pic rounded" src="../assets/pages/media/users/avatar5.jpg"> </td>
-                                <td>
-                                    <a href="javascript:;" class="primary-link">Nick</a>
-                                </td>
-                                <td> $560 </td>
-                                <td> 12 </td>
-                                <td> 24 </td>
-                                <td>
-                                    <span class="bold font-green">67%</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="fit">
-                                    <img class="user-pic rounded" src="../assets/pages/media/users/avatar5.jpg"> </td>
-                                <td>
-                                    <a href="javascript:;" class="primary-link">Nick</a>
-                                </td>
-                                <td> $560 </td>
-                                <td> 12 </td>
-                                <td> 24 </td>
-                                <td>
-                                    <span class="bold font-green">67%</span>
-                                </td>
-                            </tr>
+                            <tbody>
+                                <tr>
+                                    <td class="fit">
+                                        Active
+                                    </td>
+                                    <td>
+                                        <span class="bold font-green">
+                                            {{acc_properties_stats.number_of_active_deals}}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fit">
+                                        Under Contract
+                                    </td>
+                                    <td>
+                                        <span class="bold font-green">
+                                            {{acc_properties_stats.number_of_under_contracts}}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fit">
+                                        Offers Made
+                                    </td>
+                                    <td>
+                                        <span class="bold font-green">
+                                            {{acc_properties_stats.number_of_offers_made}}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fit">
+                                        Closed Deals
+                                    </td>
+                                    <td>
+                                        <span class="bold font-green">
+                                            {{acc_properties_stats.number_of_closed_deals}}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fit">
+                                        Offers Accepted
+                                    </td>
+                                    <td>
+                                        <span class="bold font-green">
+                                            {{acc_properties_stats.number_of_offers_accepted}}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fit">
+                                        Work in Progress
+                                    </td>
+                                    <td>
+                                        <span class="bold font-green">
+                                            {{acc_properties_stats.number_of_work_in_progress}}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fit">
+                                        Tasks Past Due
+                                    </td>
+                                    <td>
+                                        <span class="bold font-green">
+                                            {{acc_properties_stats.number_of_tasks_past_due}}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fit">
+                                        Tasks Due Today
+                                    </td>
+                                    <td>
+                                        <span class="bold font-green">
+                                            {{acc_properties_stats.number_of_tasks_due_today}}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+
                         </table>
                     </div>
                 </div>
@@ -193,20 +208,20 @@
                 </div>
                 <div class="portlet-body">
                     <div class="scroller" style="height: 329px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
-                        <div class="general-item-list">
-                            <div class="item">
+                            <div class="item" ng-repeat="task in tasks_due_today">
                                 <div class="item-head">
                                     <div class="item-details">
-                                        <img class="item-pic rounded" src="../assets/pages/media/users/avatar4.jpg">
-                                        <a href="" class="item-name primary-link">Nick Larson</a>
-                                        <span class="item-label">3 hrs ago</span>
+                                        <a href="" class="item-name primary-link">{{task.task_name}}</a>
+                                        <span class="item-label">5 hours ago</span>
                                     </div>
                                     <span class="item-status">
                                         <span class="badge badge-empty badge-success"></span> Open</span>
                                 </div>
-                                <div class="item-body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </div>
+                                <div class="item-body"> 
+                                    WorkSpace: {{task.workspace_name}}
+                                </div>
                             </div>
-                            <div class="item">
+<!--                             <div class="item">
                                 <div class="item-head">
                                     <div class="item-details">
                                         <img class="item-pic rounded" src="../assets/pages/media/users/avatar3.jpg">
@@ -218,6 +233,7 @@
                                 </div>
                                 <div class="item-body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat tincidunt ut laoreet. </div>
                             </div>
+ -->                        
                         </div>
                     </div>
                 </div>
@@ -247,7 +263,7 @@
                 <div class="portlet-body">
                     <div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
                         <ul class="feeds">
-                            <li>
+                            <li ng-repeat="task in tasks_past_due">
                                 <div class="col1">
                                     <div class="cont">
                                         <div class="cont-col1">
@@ -256,7 +272,7 @@
                                             </div>
                                         </div>
                                         <div class="cont-col2">
-                                            <div class="desc"> You have 4 pending tasks.
+                                            <div class="desc"> {{task.task_name}}.
                                                 <span class="label label-sm label-warning "> Take action
                                                     <i class="fa fa-share"></i>
                                                 </span>
@@ -265,10 +281,10 @@
                                     </div>
                                 </div>
                                 <div class="col2">
-                                    <div class="date"> Just now </div>
+                                    <div class="date"> {{task.due_date}}</div>
                                 </div>
                             </li>
-                            <li>
+<!--                             <li>
                                 <a href="#">
                                     <div class="col1">
                                         <div class="cont">
@@ -287,6 +303,7 @@
                                     </div>
                                 </a>
                             </li>
+ -->                        
                         </ul>
                     </div>
                 </div>
