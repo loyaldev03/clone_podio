@@ -58,7 +58,7 @@
                 <div class="portlet-title">
                     <div class="caption caption-md">
                         <i class="icon-bar-chart font-green"></i>
-                        <span class="caption-subject font-green bold">Under Contracts (10 deals)</span>
+                        <span class="caption-subject font-green bold">Under Contracts ({{acc_properties_stats.number_of_under_contracts}})</span>
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -73,7 +73,7 @@
                 <div class="portlet-title">
                     <div class="caption caption-md">
                         <i class="icon-bar-chart font-green"></i>
-                        <span class="caption-subject font-green bold">Offers Made (100)</span>
+                        <span class="caption-subject font-green bold">Offers Made ({{acc_properties_stats.number_of_offers_made}})</span>
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -96,7 +96,7 @@
                         <table class="table table-hover table-light">
                             <thead>
                                 <tr class="uppercase">
-                                    <th> Classified </th>
+                                    <th width="50%"> Classified </th>
                                     <th> Number </th>
                                 </tr>
                             </thead>
@@ -197,7 +197,7 @@
                 <div class="portlet-title">
                     <div class="caption caption-md">
                         <i class="icon-bar-chart font-green"></i>
-                        <span class="caption-subject font-green bold">Closed (10 deals)</span>
+                        <span class="caption-subject font-green bold">Closed ({{acc_properties_stats.number_of_closed_deals}})</span>
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -212,7 +212,7 @@
                 <div class="portlet-title">
                     <div class="caption caption-md">
                         <i class="icon-bar-chart font-green"></i>
-                        <span class="caption-subject font-green bold">Offers Accepted (20)</span>
+                        <span class="caption-subject font-green bold">Offers Accepted ({{acc_properties_stats.number_of_offers_accepted}})</span>
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -232,32 +232,20 @@
                 </div>
                 <div class="portlet-body">
                     <div class="scroller" style="height: 329px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
+                        <div class="general-item-list">
                             <div class="item" ng-repeat="task in tasks_due_today">
                                 <div class="item-head">
                                     <div class="item-details">
                                         <a href="" class="item-name primary-link">{{task.task_name}}</a>
-                                        <span class="item-label">5 hours ago</span>
+                                        <span class="item-label">3 hrs ago</span>
                                     </div>
                                     <span class="item-status">
                                         <span class="badge badge-empty badge-success"></span> Open</span>
                                 </div>
-                                <div class="item-body"> 
-                                    WorkSpace: {{task.workspace_name}}
+                                <div class="item-body">
+                                    {{task.task_description}} 
                                 </div>
                             </div>
-<!--                             <div class="item">
-                                <div class="item-head">
-                                    <div class="item-details">
-                                        <img class="item-pic rounded" src="../assets/pages/media/users/avatar3.jpg">
-                                        <a href="" class="item-name primary-link">Mark</a>
-                                        <span class="item-label">5 hrs ago</span>
-                                    </div>
-                                    <span class="item-status">
-                                        <span class="badge badge-empty badge-warning"></span> Pending</span>
-                                </div>
-                                <div class="item-body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat tincidunt ut laoreet. </div>
-                            </div>
- -->                        
                         </div>
                     </div>
                 </div>
@@ -272,14 +260,29 @@
                 <div class="portlet-title">
                     <div class="caption caption-md">
                         <i class="icon-bar-chart font-green"></i>
-                        <span class="caption-subject font-green bold uppercase">Work Progress</span>
+                        <span class="caption-subject font-green bold uppercase">Work In Progress</span>
                     </div>
                 </div>
-                <div class="portlet-bodycol-sm-12" style="height: 260px">
-                    <div class="col-md-6">
-			
+                <div class="portlet-body portlet-bodycol-sm-12">
+                    <div class="col-md-7">
+                        <div class="scroller" style="height: 329px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
+                            <div class="general-item-list">
+                                <div class="item" ng-repeat="task in work_in_progress">
+                                    <div class="item-head">
+                                        <div class="item-details">
+                                            <a href="" class="item-name primary-link">{{task.task_name}}</a>
+                                        </div>
+                                        <span class="item-status">
+                                            <span class="badge badge-empty badge-success"></span> Open</span>
+                                    </div>
+                                    <div class="item-body">
+                                        {{task.task_description}} 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>			             
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div id="work_progress" style="height: 260px"> </div>
                     </div>
                 </div>
@@ -319,26 +322,6 @@
                                     <div class="date"> {{task.due_date}}</div>
                                 </div>
                             </li>
-<!--                             <li>
-                                <a href="#">
-                                    <div class="col1">
-                                        <div class="cont">
-                                            <div class="cont-col1">
-                                                <div class="label label-sm label-success">
-                                                    <i class="fa fa-bar-chart-o"></i>
-                                                </div>
-                                            </div>
-                                            <div class="cont-col2">
-                                                <div class="desc"> Finance Report for year 2013 has been released. </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col2">
-                                        <div class="date"> 20 mins </div>
-                                    </div>
-                                </a>
-                            </li>
- -->                        
                         </ul>
                     </div>
                 </div>
@@ -360,45 +343,23 @@
                         <div class="tab-pane active" id="tab_1_1">
                             <div class="scroller" style="height: 306px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
                                 <ul class="feeds">
-                                    <li>
+                                    <li ng-repeat="task in properties_not_updated_in">
                                         <div class="col1">
                                             <div class="cont">
                                                 <div class="cont-col1">
                                                     <div class="label label-sm label-success">
-                                                        <i class="fa fa-bell-o"></i>
+                                                        <span>{{task.number}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="cont-col2">
-                                                    <div class="desc"> You have 4 pending tasks.
-                                                        <span class="label label-sm label-info"> Take action
-                                                            <i class="fa fa-share"></i>
-                                                        </span>
+                                                    <div class="desc"> {{task.property}}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col2">
-                                            <div class="date"> Just now </div>
+                                            <div class="date"> {{task.date}} </div>
                                         </div>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">
-                                            <div class="col1">
-                                                <div class="cont">
-                                                    <div class="cont-col1">
-                                                        <div class="label label-sm label-success">
-                                                            <i class="fa fa-bell-o"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="cont-col2">
-                                                        <div class="desc"> New version v1.4 just lunched! </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col2">
-                                                <div class="date"> 20 mins </div>
-                                            </div>
-                                        </a>
                                     </li>
                                 </ul>
                             </div>

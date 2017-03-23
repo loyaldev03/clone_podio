@@ -25,19 +25,33 @@ angular.module('MetronicApp').controller('DashboardController', function($rootSc
     }
 
     $scope.tasks_due_today = [
-    	{task_name: "first_task", workspace_name: "first_workspace"},
-    	{task_name: "second_task", workspace_name: "second_workspace"},
-    	{task_name: "third_task", workspace_name: "third_workspace"},
-    	{task_name: "fourth_task", workspace_name: "fourth_workspace"},
-    	{task_name: "fifth_task", workspace_name: "fifth_workspace"}
+    	{task_name: "first_task", workspace_name: "first_workspace", task_description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat."},
+    	{task_name: "second_task", workspace_name: "second_workspace", task_description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat."},
+    	{task_name: "third_task", workspace_name: "third_workspace", task_description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat."},
+    	{task_name: "fourth_task", workspace_name: "fourth_workspace", task_description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat."},
+    	{task_name: "fifth_task", workspace_name: "fifth_workspace", task_description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat."}
     ];
 
     $scope.tasks_past_due = [
-    	{task_name: "first_task", workspace_name: "first_workspace", due_date: "3-3-2016"},
-    	{task_name: "second_task", workspace_name: "second_workspace", due_date: "5-5-2016"},
-    	{task_name: "third_task", workspace_name: "third_workspace", due_date: "1-6-2016"},
-    	{task_name: "fourth_task", workspace_name: "fourth_workspace", due_date: "4-5-2016"},
-    	{task_name: "fifth_task", workspace_name: "fifth_workspace", due_date: "8-1-2016"}
+    	{task_name: "first_task", workspace_name: "first_workspace", due_date: "5"},
+    	{task_name: "second_task", workspace_name: "second_workspace", due_date: "4"},
+    	{task_name: "third_task", workspace_name: "third_workspace", due_date: "3"},
+    	{task_name: "fourth_task", workspace_name: "fourth_workspace", due_date: "3"},
+    	{task_name: "fifth_task", workspace_name: "fifth_workspace", due_date: "2"}
     ];
 
+    $scope.work_in_progress = [
+    	{task_name: "first_task", workspace_name: "first_workspace", task_description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat."},
+    	{task_name: "second_task", workspace_name: "second_workspace", task_description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat."},
+    	{task_name: "third_task", workspace_name: "third_workspace", task_description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat."},
+    	{task_name: "fourth_task", workspace_name: "fourth_workspace", task_description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat."},
+    	{task_name: "fifth_task", workspace_name: "fifth_workspace", task_description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat."}
+    ];
+
+    $scope.properties_not_updated_in = [
+    	{number: "99", property: "summer", date: "80"},
+    	{number: "67", property: "chokee", date: "19"},
+    	{number: "88", property: "branch", date: "25"},
+    	{number: "103", property: "win", date: "16"},
+    ];
 });
