@@ -129,7 +129,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                             'assets/global/plugins/morris/raphael-min.js',                            
                             'assets/global/plugins/jquery.sparkline.min.js',
 
-                            'assets/pages/scripts/dashboard.js',
+                            'js/scripts/dashboard.js',
                             'js/controllers/DashboardController.js',
                         ] 
                     });
