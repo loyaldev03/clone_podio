@@ -49,11 +49,14 @@ MetronicApp.factory('settings', ['$rootScope', function($rootScope) {
 }]);
 
 /* Setup App Main Controller */
-MetronicApp.controller('AppController', ['$scope', '$rootScope', function($scope, $rootScope) {
+MetronicApp.controller('AppController', ['$scope', '$rootScope', 'auth', function($scope, $rootScope, auth) {
     $scope.$on('$viewContentLoaded', function() {
         //App.initComponents(); // init core components
-        //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive 
+        // Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive 
     });
+    $scope.isLoggedIn = function() {
+        return auth.isLoggedIn();
+    };
 }]);
 
 /***
@@ -63,10 +66,14 @@ initialization can be disabled and Layout.init() should be called on page load c
 ***/
 
 /* Setup Layout Part - Header */
-MetronicApp.controller('HeaderController', ['$scope', function($scope) {
+MetronicApp.controller('HeaderController', ['$scope', 'auth', '$location', function($scope, auth, $location) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initHeader(); // init header
     });
+    $scope.logOut = function() {
+        auth.logOut();
+        $location.path('/login');
+    }
 }]);
 
 /* Setup Layout Part - Sidebar */
@@ -100,15 +107,72 @@ MetronicApp.controller('FooterController', ['$scope', function($scope) {
 }]);
 
 /* Setup Rounting For All Pages */
-MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider, $window) {
     // Redirect any unmatched url
-    $urlRouterProvider.otherwise("/dashboard.html");  
+    $urlRouterProvider.otherwise("/dashboard");  
 
     $stateProvider
+        .state('login', {
+            url: '/login',
+            templateUrl: 'views/authenticate/login.html',
+            controller: 'AuthCtrl',
+            onEnter: ['$state', 'auth', '$location', function($state, auth, $location){
+                if(auth.isLoggedIn()){
+                  $location.path('/')
+                }
+            }],
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            'assets/global/plugins/highcharts/js/highcharts-more.js',
+                            'assets/global/plugins/highcharts/js/modules/solid-gauge.js',
 
+                            'assets/global/plugins/morris/morris.css',                            
+                            'assets/global/plugins/morris/morris.min.js',
+                            'assets/global/plugins/morris/raphael-min.js',                            
+                            'assets/global/plugins/jquery.sparkline.min.js',
+                            'js/scripts/dashboard.js',
+                            'js/controllers/AuthController.js',
+                        ] 
+                    });
+                }],
+            }
+        })
+        .state('register', {
+            url: '/register',
+            templateUrl: 'views/authenticate/register.html',
+            controller: 'AuthCtrl',
+            onEnter: ['$state', 'auth', '$location', function($state, auth, $location){
+                if(auth.isLoggedIn()){
+                  $location.path('/')
+                }
+            }],
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            'assets/global/plugins/highcharts/js/highcharts-more.js',
+                            'assets/global/plugins/highcharts/js/modules/solid-gauge.js',
+
+                            'assets/global/plugins/morris/morris.css',                            
+                            'assets/global/plugins/morris/morris.min.js',
+                            'assets/global/plugins/morris/raphael-min.js',                            
+                            'assets/global/plugins/jquery.sparkline.min.js',
+                            'js/scripts/dashboard.js',
+                            'js/controllers/AuthController.js',
+                        ] 
+                    });
+                }],
+            }          
+        })
         // Dashboard
         .state('dashboard', {
-            url: "/dashboard.html",
+            url: "/dashboard",
             templateUrl: "views/dashboard.html",            
             data: {pageTitle: 'Admin Dashboard Template'},
             controller: "DashboardController",

@@ -7,7 +7,6 @@ angular.module('MetronicApp')
     };
 
     o.get_statistics = function() {
-      console.log("---------------inside get statics ---------------");
       return $http.get('/api/v1/statistics')
         .then(function(res) {
           angular.copy(res.data, o.statistics);
