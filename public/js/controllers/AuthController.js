@@ -10,7 +10,7 @@ function($scope, $state, auth, $location){
     auth.register($scope.user).error(function(error){
       $scope.error = error;
     }).then(function(){
-      $location.path( "/dashboard" );
+      $state.go( "dashboard" );
     });
   };
 
@@ -18,7 +18,7 @@ function($scope, $state, auth, $location){
     auth.logIn($scope.user).error(function(error){
       $scope.error = error;
     }).then(function(){
-      $location.path( "/dashboard" );
+      $state.go( "dashboard" );
     });
   };
 
@@ -26,11 +26,11 @@ function($scope, $state, auth, $location){
     auth.logOut($scope.user).error(function(error){
       $scope.error = error;
     }).then(function() {
-      $location.path( "/login" );
+      $state.go( "login" );
     })
   }
 
   $scope.createAccount = function() {
-    $location.path('/register');
+    $state.go('register');
   }
 }])
