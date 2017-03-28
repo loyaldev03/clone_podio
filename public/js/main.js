@@ -109,7 +109,7 @@ MetronicApp.controller('FooterController', ['$scope', function($scope) {
 /* Setup Rounting For All Pages */
 MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider, $window) {
     // Redirect any unmatched url
-    $urlRouterProvider.otherwise("/dashboard");  
+    $urlRouterProvider.otherwise("/login");  
 
     $stateProvider
         .state('login', {
@@ -118,7 +118,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             controller: 'AuthCtrl',
             onEnter: ['$state', 'auth', '$location', function($state, auth, $location){
                 if(auth.isLoggedIn()){
-                  $location.path('/')
+                  $location.path('/dashboard')
                 }
             }],
             resolve: {
@@ -147,7 +147,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             controller: 'AuthCtrl',
             onEnter: ['$state', 'auth', '$location', function($state, auth, $location){
                 if(auth.isLoggedIn()){
-                  $location.path('/')
+                  $location.path('/dashboard')
                 }
             }],
             resolve: {
