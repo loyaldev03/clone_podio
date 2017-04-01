@@ -1,0 +1,37 @@
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a ui-sref="dashboard">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a ui-sref="dashboard">Workspace</a>
+        </li>
+        <button type="button" class="btn btn-sm btn-default" ng-controller="ApppModalDialogHelperController" ng-click="addAppp()"> Add App </button>
+    </ul>
+</div>
+<div class="row">
+    <form class="" ng-submit="createAppp()">
+        <div class="alert alert-danger display-hide">
+            <button class="close" data-close="alert"></button>
+            <span> Enter Detail for App. </span>
+        </div>
+        <div class="form-group">
+            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+            <label class="control-label visible-ie8 visible-ie9">App Name</label>
+            <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="Name" name="name" ng-model="appp.name" /> </div>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">Item Name</label>
+            <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="Item Name" name="item_name" ng-model="appp.item_name" /> </div>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">Type</label>
+            <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="Type" name="type" ng-model="appp.type" /> </div>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">App Icon</label>
+            <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="App Icon" name="app_icon" ng-model="appp.app_icon" /> </div>
+        <div class="form-actions">
+            <button type="submit" class="btn green uppercase">Create</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </form>
+</div>

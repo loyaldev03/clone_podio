@@ -7,7 +7,7 @@ var TaskSchema = new mongoose.Schema({
 	privacy: string,
 	user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	workspace: {type: mongoose.Schema.Types.ObjectId, ref: 'Workspace'},
-	app: {type: mongoose.Schema.Types.ObjectId, ref: 'App'},
+	appp: {type: mongoose.Schema.Types.ObjectId, ref: 'Appp'},
 	item: {type: mongoose.Schema.Types.ObjectId, ref: 'Item'}
 });
 

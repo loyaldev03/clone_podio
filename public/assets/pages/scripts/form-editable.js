@@ -231,7 +231,7 @@ var FormEditable = function() {
             select2: {
                 data: ['html', 'javascript', 'css', 'ajax'],
                 tags: true,
-                tokenSeparators: [','], 
+                tokenSeparators: [',', ' '],
                 multiple: true
             }
         });

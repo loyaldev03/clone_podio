@@ -7,7 +7,8 @@ var MetronicApp = angular.module("MetronicApp", [
     "ui.router", 
     "ui.bootstrap", 
     "oc.lazyLoad",  
-    "ngSanitize"
+    "ngSanitize",
+    "satellizer"
 ]); 
 
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
@@ -49,14 +50,21 @@ MetronicApp.factory('settings', ['$rootScope', function($rootScope) {
 }]);
 
 /* Setup App Main Controller */
-MetronicApp.controller('AppController', ['$scope', '$rootScope', 'auth', function($scope, $rootScope, auth) {
-    $scope.$on('$viewContentLoaded', function() {
-        //App.initComponents(); // init core components
-        // Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive 
-    });
-    $scope.isLoggedIn = function() {
-        return auth.isLoggedIn();
-    };
+MetronicApp.controller('AppController', [
+    '$scope', 
+    '$rootScope', 
+    's_auth', 
+    function($scope, $rootScope, s_auth) {
+        $scope.$on('$viewContentLoaded', function() {
+            //App.initComponents(); // init core components
+            // Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive 
+        });
+        $scope.isLoggedIn = function() {
+            return s_auth.isLoggedIn();
+        };
+        $scope.isActivated = function(){
+            return s_auth.isActivated();
+        }
 }]);
 
 /***
@@ -66,14 +74,29 @@ initialization can be disabled and Layout.init() should be called on page load c
 ***/
 
 /* Setup Layout Part - Header */
-MetronicApp.controller('HeaderController', ['$scope', 'auth', '$location', function($scope, auth, $location) {
+MetronicApp.controller('HeaderController', [
+    '$scope', 
+    's_auth', 
+    '$location', 
+    '$rootScope',
+    '$state',
+    's_property',
+    function($scope, s_auth, $location, $rootScope, $state, s_property) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initHeader(); // init header
     });
     $scope.logOut = function() {
-        auth.logOut();
+        s_auth.logOut();
         $location.path('/login');
     }
+    $scope.newProperty = function() {
+        $state.go('properties_new', {workspace_id: $rootScope.current_workspace._id});
+    }
+    $scope.newAppp = function() {
+        $state.go('appps_new', {workspace_id: $rootScope.current_workspace._id});
+    }
+    $scope.fields = s_property.fields;
+
 }]);
 
 /* Setup Layout Part - Sidebar */
@@ -106,6 +129,19 @@ MetronicApp.controller('FooterController', ['$scope', function($scope) {
     });
 }]);
 
+/* Setup Social Login */
+MetronicApp.constant('config_env_variable', {
+    facebook_app_id: '610661099137289',
+});
+MetronicApp.config(function($authProvider) {
+    // Optional: For client-side use (Implicit Grant), set responseType to 'token' (default: 'code')
+    $authProvider.facebook({
+      clientId: '610661099137289',
+      url: '/auth/facebook',
+      scope: ['manage_pages', 'publish_actions'],
+    });
+
+});
 /* Setup Rounting For All Pages */
 MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider, $window) {
     // Redirect any unmatched url
@@ -115,9 +151,9 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         .state('login', {
             url: '/login',
             templateUrl: 'views/authenticate/login.html',
-            controller: 'AuthCtrl',
-            onEnter: ['$state', 'auth', '$location', function($state, auth, $location){
-                if(auth.isLoggedIn()){
+            controller: 'AuthController',
+            onEnter: ['$state', 's_auth', '$location', function($state, s_auth, $location){
+                if(s_auth.isLoggedIn()){
                   $location.path('/dashboard')
                 }
             }],
@@ -144,9 +180,9 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         .state('register', {
             url: '/register',
             templateUrl: 'views/authenticate/register.html',
-            controller: 'AuthCtrl',
-            onEnter: ['$state', 'auth', '$location', function($state, auth, $location){
-                if(auth.isLoggedIn()){
+            controller: 'AuthController',
+            onEnter: ['$state', 's_auth', '$location', function($state, s_auth, $location){
+                if(s_auth.isLoggedIn()){
                   $location.path('/dashboard')
                 }
             }],
@@ -170,6 +206,16 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                 }],
             }          
         })
+        .state('activate', {
+            url: "/activate/:id",
+            controller: "AuthController",
+            onEnter: ['$stateParams', 's_auth', '$state', function($stateParams, s_auth, $state) {
+                s_auth.activate($stateParams.id).then(function(res) {
+                    $state.go('dashboard');
+                })
+            }]
+        })
+
         // Dashboard
         .state('dashboard', {
             url: "/dashboard",
@@ -197,6 +243,96 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                 load_statistics: ['statistics', function(statistics){
                     return statistics.get_statistics();
                 }]
+            }
+        })
+
+        .state('workspaces_show', {
+            url: "/workspace/:id",
+            templateUrl: "views/workspaces/show.html",            
+            data: {pageTitle: 'Workspace'},
+            controller: "WorkspaceController",
+            resolve: {
+                current_workspace: ['s_workspace', '$stateParams', function(s_workspace, $stateParams) {
+                    return s_workspace.get($stateParams.id);
+                }]
+            }
+        })
+
+        .state('appps_new', {
+            url: "/workspace/:workspace_id/apps/new",
+            templateUrl: "views/appps/new.html",            
+            data: {pageTitle: 'App'},
+            controller: "ApppController",
+            resolve: {
+            }
+        })
+        .state('appps_edit', {
+            url: "/workspace/:workspace_id/apps/:appp_id/edit",
+            templateUrl: "views/appps/edit.html",            
+            data: {pageTitle: 'App Edit'},
+            controller: "ApppController",
+            resolve: {
+            }
+        })
+        .state('appps_show', {
+            url: "/workspace/:workspace_id/apps/:appp_id",
+            templateUrl: "views/appps/show.html",            
+            data: {pageTitle: 'App Edit'},
+            controller: "ApppController",
+            resolve: {
+                current_appp: ['$stateParams', 's_appp', function($stateParams, s_appp) {
+                    return s_appp.get($stateParams.appp_id);
+                }]
+            }
+        })
+
+        .state('items_new', {
+            url: "/workspace/:workspace_id/apps/:appp_id/items/new",
+            templateUrl: "views/items/new.html",            
+            data: {pageTitle: 'New Item'},
+            controller: "ItemController",
+            resolve: {
+                initializeFieldsForItem: ['$stateParams', 's_item', function($stateParams, s_item){
+                    return s_item.getFields($stateParams.appp_id);
+                }]
+            }
+        })
+        .state('items_show', {
+            url: "/workspace/:workspace_id/apps/:appp_id/items/:item_id",
+            templateUrl: "views/items/show.html",            
+            data: {pageTitle: 'New Item'},
+            controller: "ItemController",
+            resolve: {
+            }
+        })
+
+        .state('properties_show', {
+            url: "/workspaces/:workspace_id/property/:property_id",
+            templateUrl: "views/properties/show.html",
+            data: {pageTitle: 'Property Detail'},
+            controller: "PropertyController",
+            resolve: {
+                
+            }
+        })
+        .state('properties_new', {
+            url: "/workspaces/:workspace_id/properties/new",
+            templateUrl: "views/properties/new.html",
+            data: {pageTitle: 'New Property'},
+            controller: "PropertyController",
+            resolve: {
+                initializePropertyFields: ['$stateParams', 's_property', function($stateParams, s_property){
+                    return s_property.getPropertyFields($stateParams.workspace_id);
+                }]                
+            }
+        })
+        .state('properties_edit/', {
+            url: "/workspaces/:workspace_id/properties/:property_id/edit",
+            templateUrl: "views/properties/edit.html",
+            data: {pageTitle: 'Property Update'},
+            controller: "PropertyController",
+            resolve: {
+                
             }
         })
 

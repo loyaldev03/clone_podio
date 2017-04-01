@@ -1,0 +1,20 @@
+.select-appp-box 
+{
+	height: 200px;
+	border: 1px solid black;
+}
+.appp-edit-block
+{
+	height: 500px;
+	border: 1px solid black;
+} 
+.appp-show-block
+{
+	height: 500px;
+	border: 1px solid black;
+	.appp-show-items-bar {
+	  margin-top: 10px;
+	  width: 100%;
+	  margin-left: 10px;	
+	}
+}

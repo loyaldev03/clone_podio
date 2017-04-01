@@ -1,4 +1,3 @@
-var conf = require('./config/config');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -14,11 +13,21 @@ var passport = require('passport');
 
 mongoose.connect('mongodb://localhost/news');
 require('./models/Users');
+require('./models/Workspaces');
+require('./models/Appps');
+require('./models/Items');
+require('./models/Fields');
+require('./models/Values');
 require('./config/passport');
 
 var index = require('./routes/index');
-var api_v1 = require('./routes/api_v1');
-var authenticate = require('./routes/authenticate');
+var statistics_api = require('./routes/statistics_api');
+var authenticate_api = require('./routes/authenticate_api');
+var workspace_api = require('./routes/workspace_api');
+var appp_api = require('./routes/appp_api');
+var item_api = require('./routes/item_api');
+var social_login = require('./routes/social_login');
+var field_api = require('./routes/field_api');
 
 var app = express();
 
@@ -36,8 +45,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 
 app.use('/', index);
-app.use('/api/v1/', api_v1);
-app.use('/api/v1/', authenticate);
+app.use('/api/v1/', statistics_api);
+app.use('/api/v1/', authenticate_api);
+app.use('/api/v1/', workspace_api);
+app.use('/api/v1/', appp_api);
+app.use('/api/v1/', item_api);
+app.use('/api/v1/', field_api);
+app.use('/', social_login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,26 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a ui-sref="dashboard">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a ui-sref="dashboard">Workspace</a>
+        </li>
+        <button type="button" class="btn btn-sm btn-default" ng-controller="ApppModalDialogHelperController" ng-click="addAppp()"> Add App </button>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div class="workspace-detail">
+    <div class="row">
+        <div class="col-sm-6 workspace-detail-block">
+            <h1> {{current_workspace.title}} </h1>
+        </div>
+        <div class="col-sm-6 workspace-detail-block">
+            <h1> Tasks </h1>
+        </div>
+    </div>
+</div>
+<!-- END MAIN CONTENT -->

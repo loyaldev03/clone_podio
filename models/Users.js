@@ -23,6 +23,14 @@ var UserSchema = new mongoose.Schema({
 	zip: String,
 	state: String,
 	country:String,
+	activated: {
+		type: Boolean,
+		default: false
+	},
+	facebook: String,
+	twitter: String,
+	linkedin: String,
+	default_workspace: {type: mongoose.Schema.Types.ObjectId, ref: 'Workspace'},
 	tasks: [{type: mongoose.Schema.Types.ObjectId, ref: 'Task'}],
 	workspaces: [{type: mongoose.Schema.Types.ObjectId, ref: 'Workspace'}]
 });
@@ -48,6 +56,7 @@ UserSchema.methods.generateJWT = function() {
 	return jwt.sign({
 		_id: this._id,
 		username: this.username,
+		activated: this.activated,
 		exp: parseInt(exp.getTime() / 1000),
 	}, 'SECRET');
 }

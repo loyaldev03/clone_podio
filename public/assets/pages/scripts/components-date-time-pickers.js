@@ -158,6 +158,7 @@ var ComponentsDateTimePickers = function () {
             autoclose: true,
             isRTL: App.isRTL(),
             format: "dd MM yyyy - hh:ii",
+            fontAwesome: true,
             pickerPosition: (App.isRTL() ? "bottom-right" : "bottom-left")
         });
 
@@ -166,6 +167,7 @@ var ComponentsDateTimePickers = function () {
             format: "dd MM yyyy - hh:ii",
             autoclose: true,
             todayBtn: true,
+            fontAwesome: true,
             startDate: "2013-02-14 10:00",
             pickerPosition: (App.isRTL() ? "bottom-right" : "bottom-left"),
             minuteStep: 10
@@ -176,6 +178,7 @@ var ComponentsDateTimePickers = function () {
             format: "dd MM yyyy - HH:ii P",
             showMeridian: true,
             autoclose: true,
+            fontAwesome: true,
             pickerPosition: (App.isRTL() ? "bottom-right" : "bottom-left"),
             todayBtn: true
         });

@@ -10,6 +10,14 @@ body {
 .page-lock {
   margin: 90px auto 30px auto;
   width: 450px; }
+  .page-lock .lock-cont {
+    display: table;
+    table-layout: fixed; }
+    .page-lock .lock-cont .lock-item {
+      display: table-cell;
+      vertical-align: middle; }
+      .page-lock .lock-cont .lock-item .lock-item-full {
+        width: 100%; }
 
 .page-lock .page-logo {
   text-align: center;
@@ -59,7 +67,8 @@ body {
   margin-top: 0px;
   color: #dbe2ea;
   font-size: 18px;
-  font-weight: 400; }
+  font-weight: 400;
+  display: inline-block; }
 
 .lock-form .form-group {
   margin-top: 20px; }
@@ -121,6 +130,13 @@ body {
   .page-lock {
     margin: 30px auto;
     width: 280px; }
+    .page-lock .lock-cont {
+      display: block; }
+      .page-lock .lock-cont .lock-item {
+        display: block;
+        text-align: center; }
+        .page-lock .lock-cont .lock-item .lock-item-full {
+          width: 100%; }
   .lock-body {
     margin: 0px; }
   .page-lock .page-body {

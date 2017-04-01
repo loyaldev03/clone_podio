@@ -33,6 +33,16 @@
         <ul class="nav navbar-nav pull-right">
             <!-- BEGIN NOTIFICATION DROPDOWN -->
             <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+            <li>
+                <a href="javascript:;" ng-click="newAppp()" ng-if="current_workspace">
+                    Add App
+                </a>
+            </li>            
+            <li>
+                <a href="javascript:;" ng-click="newProperty()" ng-if="current_workspace">
+                    Add Property
+                </a>
+            </li>
             <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                 <a href="#" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
                     <i class="icon-bell"></i>

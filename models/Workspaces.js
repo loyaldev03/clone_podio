@@ -1,10 +1,12 @@
 var mongoose = require('mongoose');
 
 var WorkspaceSchema = new mongoose.Schema({
-	title: string,
-	access: string,
+	title: String,
+	description: String,
+	access: String,
+	default_appp: {type: mongoose.Schema.Types.ObjectId, ref: 'Appp'},
 	user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-	apps: [{type: mongoose.Schema.Types.ObjectId, ref: 'App'}],
+	appps: [{type: mongoose.Schema.Types.ObjectId, ref: 'Appp'}],
 	tasks: [{type: mongoose.Schema.Types.ObjectId, ref: 'Task'}]
 });
 

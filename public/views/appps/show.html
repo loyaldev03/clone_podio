@@ -1,0 +1,28 @@
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a ui-sref="dashboard">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a ui-sref="dashboard">Workspace</a>
+        </li>
+        <button type="button" class="btn btn-sm btn-default" ng-controller="ApppModalDialogHelperController" ng-click="addAppp()"> Add App </button>
+    </ul>
+</div>
+<div class="row">
+	<div class="col-sm-3 appp-show-block">
+		<h3>{{current_appp.name}}</h3>
+		<h3>{{current_appp.item_name}}</h3>
+		<h3>{{current_appp.type}}</h3>
+		<h3>{{current_appp.app_icon}}</h3>
+	</div>
+	<div class="col-sm-9 appp-show-block">
+		<div class="page-bar appp-show-items-bar">
+		    <ul class="page-breadcrumb">
+		        <button type="button" class="btn btn-sm btn-default" ng-controller="ApppModalDialogHelperController" ng-click="addItem()"> Add {{current_appp.item_name}} </button>
+		    </ul>
+		</div>	
+		<h4> Items </h4>
+	</div>
+</div>

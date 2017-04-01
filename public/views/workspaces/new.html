@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <h3 class="modal-title">Create WorkSpace</h3>
+</div>
+<div class="modal-body">
+    <form class="" ng-submit="createWorkspace()">
+        <div class="alert alert-danger display-hide">
+            <button class="close" data-close="alert"></button>
+            <span> Enter any Title and Access. </span>
+        </div>
+        <div class="form-group">
+            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+            <label class="control-label visible-ie8 visible-ie9">Title</label>
+            <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="Title" name="title" ng-model="workspace.title" /> </div>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">Access</label>
+            <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="Access" name="access" ng-model="workspace.access" /> </div>
+        <div class="form-actions">
+            <button type="submit" class="btn green uppercase">Create</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </form>
+</div>

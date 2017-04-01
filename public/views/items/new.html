@@ -1,0 +1,21 @@
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a ui-sref="dashboard">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a ui-sref="dashboard">New Item</a>
+        </li>
+        <button type="button" class="btn btn-sm btn-default" ng-controller="ApppModalDialogHelperController" ng-click="modifyTemplate()"> Modify Template </button>
+    </ul>
+</div>
+<div class="row">
+	<form class="" ng-submit="create()">
+		<div class="form-group" ng-repeat = "field in fields">
+      <label class="control-label">{{field.name}}</label>
+      <input ng-if="field.type == 'text'" class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" ng-model="item[field._id]" />
+    </div>
+    <button type="submit">Ok</button>
+  </form>
+</div>

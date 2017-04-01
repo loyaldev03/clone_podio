@@ -22,8 +22,12 @@ var ComponentsContextMenu = function () {
         // Demo 3
         $('#context2').contextmenu({
             target: '#context-menu2',
-            onItem: function (context, e) {
-                alert($(e.target).text());
+            onItem: function (context, e) { 
+                if ($(e.target).data('url')) {
+                    this.closemenu();
+                } else {
+                    alert($(e.target).text());
+                }
             }
         });
 

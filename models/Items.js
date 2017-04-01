@@ -1,8 +1,7 @@
 var mongoose = require('mongoose');
 
 var ItemSchema = new mongoose.Schema({
-	name: string,
-	app: {type: mongoose.Schema.Types.ObjectId, ref: 'App'},
+	appp: {type: mongoose.Schema.Types.ObjectId, ref: 'Appp'},
 	fields: [{type: mongoose.Schema.Types.ObjectId, ref: 'Field'}],
 	tasks: [{type: mongoose.Schema.Types.ObjectId, ref: 'Task'}]
 });

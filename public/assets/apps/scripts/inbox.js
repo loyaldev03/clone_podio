@@ -49,7 +49,7 @@ var AppInbox = function () {
             var set = jQuery('.mail-checkbox');
             var checked = jQuery(this).is(":checked");
             jQuery(set).each(function () {
-                $(this).attr("checked", checked);
+                $(this).prop('checked', checked);
             });
         });
     }

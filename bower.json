@@ -10,5 +10,20 @@
     "satellizer": "^0.15.5",
     "angular-socket-io": "^0.7.0",
     "angular-bootstrap": "^2.5.0"
-  }
+  },
+  "homepage": "https://github.com/future21star/clone_podio",
+  "authors": [
+    "future21star <future21star@yahoo.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ]
 }

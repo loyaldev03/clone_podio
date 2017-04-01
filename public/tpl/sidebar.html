@@ -33,7 +33,13 @@
                 <span class="title">Dashboard</span>
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" ng-controller="WorkspaceModalDialogHelperController">
+            <div class="sidebar-workspaces-list" ng-repeat="workspace in workspaces_list">
+                <a href="javascript:;" ng-click="goto(workspace)">{{ workspace.title }}</a>
+            </div> 
+            <a href="javascript:;" ng-click="open()">Create Workspace</a>
+        </li>
+       <!--  <li class="nav-item">
             <a ui-sref="landing_page">
                 <i class="icon-puzzle"></i> Landing Page</span>
             </a>
@@ -120,7 +126,7 @@
                 <i class="icon-refresh"></i>
                 <span class="title">Blank Page</span>
             </a>
-        </li>        
+        </li>         -->
     </ul>
     <!-- END SIDEBAR MENU -->
 </div>
