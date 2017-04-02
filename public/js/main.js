@@ -95,15 +95,59 @@ MetronicApp.controller('HeaderController', [
     $scope.newAppp = function() {
         $state.go('appps_new', {workspace_id: $rootScope.current_workspace._id});
     }
+    $scope.$watch(function(){
+        return $location.path();
+    }, function(value){
+        console.log("---------------------url change---------------------", value.match("workspace/(.*)/"));
+    });
+
     $scope.fields = s_property.fields;
 
 }]);
 
 /* Setup Layout Part - Sidebar */
-MetronicApp.controller('SidebarController', ['$state', '$scope', function($state, $scope) {
+MetronicApp.controller('SidebarController', [
+    '$state', 
+    '$scope', 
+    's_workspace', 
+    '$rootScope', 
+    'settings', 
+    '$uibModal', 
+    function($state, $scope, s_workspace, $rootScope, settings, $uibModal) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initSidebar($state); // init sidebar
     });
+    $scope.all_workspaces = function() {
+        return s_workspace.getAllWorkspaces();
+    }
+    // Modal Dialog for creating workspace
+    $scope.animationsEnabled = true;
+    $scope.open = function(opt_attributes)
+    {
+        var out = $uibModal.open(
+        {
+            animation: $scope.animationsEnabled,
+            templateUrl: "views/workspaces/new.html",
+            controller: "CreateWorkspaceModalController",
+            size: opt_attributes,
+            resolve: {
+            }
+        });
+        out.result.then(function(value)
+        {
+            $scope.selected = value;
+        }, function()
+        {
+            console.log("Modal dismissed at: " + new Date);
+        });
+    };
+    $scope.toggleAnimation = function()
+    {
+        $scope.animationsEnabled = !$scope.animationsEnabled;
+    };
+    $scope.goto = function(workspace) {
+      $state.go('workspaces_show', {id: workspace._id});
+    }    
 }]);
 
 /* Setup Layout Part - Quick Sidebar */
@@ -215,7 +259,14 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                 })
             }]
         })
-
+        .state('login_with_social', {
+            url: '/login_with_social/:jwt_token',
+            controller: "AuthController",
+            onEnter: ['$stateParams', 's_auth', '$state', function($stateParams, s_auth, $state){
+                s_auth.saveToken($stateParams.jwt_token);
+                $state.go('dashboard');
+            }]
+        })
         // Dashboard
         .state('dashboard', {
             url: "/dashboard",
@@ -280,8 +331,8 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             data: {pageTitle: 'App Edit'},
             controller: "ApppController",
             resolve: {
-                current_appp: ['$stateParams', 's_appp', function($stateParams, s_appp) {
-                    return s_appp.get($stateParams.appp_id);
+                set_current_appp: ['$stateParams', 's_appp', function($stateParams, s_appp) {
+                    return s_appp.setCurrentAppp($stateParams.appp_id);
                 }]
             }
         })
@@ -307,7 +358,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         })
 
         .state('properties_show', {
-            url: "/workspaces/:workspace_id/property/:property_id",
+            url: "/workspace/:workspace_id/property/:property_id",
             templateUrl: "views/properties/show.html",
             data: {pageTitle: 'Property Detail'},
             controller: "PropertyController",
@@ -316,7 +367,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             }
         })
         .state('properties_new', {
-            url: "/workspaces/:workspace_id/properties/new",
+            url: "/workspace/:workspace_id/properties/new",
             templateUrl: "views/properties/new.html",
             data: {pageTitle: 'New Property'},
             controller: "PropertyController",
@@ -326,8 +377,35 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                 }]                
             }
         })
+        .state('properties_index', {
+            url: "/workspace/:workspace_id/properties/index",
+            templateUrl: "views/properties/index.html",
+            data: {pageTitle: 'New Property'},
+            controller: "PropertyController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+                        files: [                             
+                            'assets/global/plugins/datatables/datatables.min.css', 
+                            'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css',
+
+                            'assets/global/plugins/datatables/datatables.all.min.js',
+
+                            'assets/pages/scripts/table-datatables-managed.min.js',
+
+                        ]
+                    });
+                }],
+                getProperties:['s_property', '$stateParams', function(s_property, $stateParams){
+                    return s_property.getPropertiesForWorkspace($stateParams.workspace_id);
+                }]               
+            }
+        })
+
         .state('properties_edit/', {
-            url: "/workspaces/:workspace_id/properties/:property_id/edit",
+            url: "/workspace/:workspace_id/properties/:property_id/edit",
             templateUrl: "views/properties/edit.html",
             data: {pageTitle: 'Property Update'},
             controller: "PropertyController",

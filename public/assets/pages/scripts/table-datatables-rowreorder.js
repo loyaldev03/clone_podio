@@ -33,10 +33,12 @@ var TableDatatablesRowreorder = function () {
             ],
 
             // setup rowreorder extension: http://datatables.net/extensions/rowreorder/
-            rowReorder: true,
-            columnDefs: [
-                { orderable: true, className: 'reorder', targets: 0 },
-                { orderable: false, targets: '_all' }
+            rowReorder: {
+
+            },
+
+            "order": [
+                [0, 'asc']
             ],
             
             "lengthMenu": [

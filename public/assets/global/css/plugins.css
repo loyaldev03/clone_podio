@@ -191,13 +191,6 @@ Bootstrap  Datetimepicker
 .modal-open .datetimepicker {
   z-index: 10055; }
 
-.bs-datetime .input-group-addon {
-  background: none;
-  padding: 0;
-  border-left: 0; }
-  .bs-datetime .input-group-addon .btn {
-    border: 0; }
-
 /***
 Bootstrap Editable
 ***/
@@ -700,13 +693,6 @@ Bootbox
 ***/
 .bootbox .bootbox-close-button {
   margin-top: 0px !important; }
-
-.tt-suggestion.tt-cursor {
-  color: #999;
-  background-color: #eee; }
-
-.multiselect-container > li > a > label {
-  padding: 3px 5px 3px 15px; }
 
 /*--------------------------------------------------
     [CSS Animation Amchart]

@@ -6,6 +6,7 @@ angular.module('MetronicApp')
 	function($http, $window, s_auth){
 		var service = {
 			fields: [],
+			properties: [],
 		};
 
 		service.getFields = function(appp_id) {
@@ -34,21 +35,30 @@ angular.module('MetronicApp')
 				return res.data;	
 			})	
 		}
-		// item.create = function(item) {
-		// 	return $http.post('/api/v1/items', item, {
-		// 		headers: {s_authorization: 'Bearer '+s_auth.getToken()}
-		// 	}).success(function(item){
-		// 				return item;
-		// 	})
-		// }
-		// item.get = function(id) {
+		service.create = function(property, workspace_id) {
+			return $http.post('/api/v1/workspaces/' + workspace_id + '/properties', property, {
+				headers: {Authorization: 'Bearer '+s_auth.getToken()}
+			}).success(function(property){
+						return property;
+			})
+		}
+
+		service.getPropertiesForWorkspace = function(workspace_id) {
+			return $http.get('/api/v1/workspaces/' + workspace_id + '/properties', {
+				headers: {Authorization: 'Bearer ' + s_auth.getToken()}
+			}).success(function(properties) {
+				service.properties = properties;
+				return properties;
+			})
+		}
+		// service.get = function(id) {
 		// 	return $http.get('/api/v1/item/'+id, {
 		// 		headers: {s_authorization: 'Bearer '+s_auth.getToken()}
 		// 	}).then(function(res){
 		// 			return res.data;
 		// 	})
 		// }
-		// item.getAllItems = function() {
+		// service.getAllItems = function() {
 		// 	return $http.get('/api/v1/items', {
 		// 		headers: {s_authorization: 'Bearer ' + s_auth.getToken()}
 		// 	}).then(function(res) {

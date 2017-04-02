@@ -6,7 +6,7 @@ var ChartsFlotcharts = function() {
         init: function() {
 
             App.addResizeHandler(function() {
-                ChartsFlotcharts.initPieCharts();
+                Charts.initPieCharts();
             });
 
         },
@@ -571,8 +571,8 @@ var ChartsFlotcharts = function() {
                 }
             };
 
-            if ($('#chart_1_1_1').size() !== 0) {
-                $.plot($("#chart_1_1_1"), [{
+            if ($('#chart_1_1').size() !== 0) {
+                $.plot($("#chart_1_1"), [{
                     data: data,
                     lines: {
                         lineWidth: 1,

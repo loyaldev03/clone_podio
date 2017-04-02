@@ -12,6 +12,9 @@ var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId; //Have also tried Schema.Types.ObjectId, mongoose.ObjectId
 
+//controllers
+var item_controller = require('../controllers/item.controller');
+
 //Item Management
 router.get('/items', auth, function(req, res, next) {
   Item.find({}, function(err, items) {
@@ -38,7 +41,7 @@ router.post('/items', auth, function(req, res, next) {
     if (err) { return next(err); }
     for (field in req.body) {
       if (field != "appp") { 
-        fields_list.push(createValue(item._id, field, req.body[field]));
+        fields_list.push(item_controller.createValue(item._id, field, req.body[field]));
       }
     }
     Promise.all(fields_list)
@@ -50,19 +53,7 @@ router.post('/items', auth, function(req, res, next) {
     })
   })
 });
-var createValue = function(item_id, field_id, _value) {
-  return new Promise(function(resolve, reject){
-    var value = new Value({
-      item: item_id,
-      field: field_id,
-      value: _value
-    });
-    value.save(function(err, value) {
-      if (err) { return reject(err); }
-      return resolve(value);
-    })    
-  })
-};
+
 router.put('/item/:id', auth, function(req, res, next) {
   Item.update({_id: req.params.id}, req.body, function(err, item) {
     if (err) { return next(err); }
@@ -75,4 +66,53 @@ router.delete('/item/:id', auth, function(req, res, next) {
     return res.json(item);
   });
 });
+
+//Properties for workspaces
+router.post('/workspaces/:workspace_id/properties', auth, function(req, res, next) {
+  Workspace.findById(req.params.workspace_id, function(err, workspace){
+    var item = new Item({appp: workspace.default_appp})
+      fields_list = [];
+      for (field in req.body) {
+        if (field != "appp") { 
+          item.fields.push(field);
+        }
+      }
+      item.save(function(err, item) {
+        if (err) { return next(err); }
+        Appp.update({_id: workspace.default_appp}, {$addToSet: {items: item._id}}, function(err, appp) {
+          if (err) {
+            return next(err);
+          }
+          for (field in req.body) {
+            if (field != "appp") { 
+              fields_list.push(item_controller.createValue(item._id, field, req.body[field]));
+            }
+          }
+          Promise.all(fields_list)
+          .then(function(_res) {
+            return res.json(item);
+          })
+          .catch(function(err) {
+            return next(err);
+          })
+        });
+      })    
+  })
+})
+
+router.get('/workspaces/:workspace_id/properties', auth, function(req, res, next){
+  Workspace.findById(req.params.workspace_id, function(err, workspace){
+    if (err) {
+      return next(err);
+    }
+    var appp_id = workspace.default_appp;
+    item_controller.getItemsForAppp(appp_id)
+    .then(function(items) {
+      return res.json(items);
+    })
+    .catch(function(err) {
+      return next(err);
+    });
+  })
+})
 module.exports = router;

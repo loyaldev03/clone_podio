@@ -11,10 +11,10 @@
     </ul>
 </div>
 <div class="row">
-    <form class="" ng-submit="create()">
+    <form class="" ng-submit="createProperty()">
         <div class="form-group" ng-repeat = "field in fields">
       <label class="control-label">{{field.name}}</label>
-      <input ng-if="field.type == 'text'" class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" ng-model="item[field._id]" />
+      <input ng-if="field.type == 'text'" class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" ng-model="property[field._id]" />
     </div>
     <button type="submit">Ok</button>
   </form>

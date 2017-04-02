@@ -62,11 +62,10 @@ var TableDatatablesAjax = function () {
                     [10, 20, 50, 100, 150, -1],
                     [10, 20, 50, 100, 150, "All"] // change per page values here
                 ],
-                "pageLength": 50, // default record count per page
+                "pageLength": 10, // default record count per page
                 "ajax": {
                     "url": "../demo/table_ajax.php", // ajax source
                 },
-                "ordering": false,
                 "order": [
                     [1, "asc"]
                 ]// set first column as a default sort by asc

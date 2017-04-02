@@ -12,8 +12,6 @@
 		monthsShort: ["Led", "Úno", "Bře", "Dub", "Kvě", "Čer", "Čnc", "Srp", "Zář", "Říj", "Lis", "Pro"],
 		today: "Dnes",
 		suffix: [],
-		meridiem: [],
-		weekStart: 1,
-		format: "dd.mm.yyyy"
+		meridiem: []
 	};
 }(jQuery));

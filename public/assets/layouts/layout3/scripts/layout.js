@@ -187,6 +187,9 @@ var Layout = function () {
     };
 
     var handleContentHeight = function() {
+        return;
+        var height;
+
         if ($('body').height() < App.getViewPort().height) {            
             height = App.getViewPort().height -
                 $('.page-header').outerHeight() - 

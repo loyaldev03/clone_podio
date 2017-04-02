@@ -24,14 +24,11 @@ router.post('/register', function(req, res, next) {
 		if(err) {
 			return next(err);
 		}
-		debugger;
 		workspace_controller.createDefaultWorkspace(user)
 		.then(function(workspace){
-			debugger;
 			return res.json({token: user.generateJWT()});
 		})
 		.catch(function(err) {
-			debugger;
 			return next(err);
 		})
 		MailSender.sendVerificationMessage(user);

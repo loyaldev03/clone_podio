@@ -35,7 +35,7 @@ var Layout = function() {
             if (body.hasClass('page-sidebar-fixed')) {
                 height = _calculateFixedSidebarViewportHeight();
                 if (body.hasClass('page-footer-fixed') === false) {
-                    height = height - $('.page-footer').outerHeight() - 60;
+                    height = height - $('.page-footer').outerHeight();
                 }
             } else {
                 var headerHeight = $('.page-header').outerHeight();
@@ -48,7 +48,7 @@ var Layout = function() {
                 }
 
                 if ((height + headerHeight + footerHeight) <= App.getViewPort().height) {
-                    height = App.getViewPort().height - headerHeight - footerHeight - 60;
+                    height = App.getViewPort().height - headerHeight - footerHeight;
                 }
             }
             content.css('min-height', height);

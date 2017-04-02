@@ -70,7 +70,7 @@ var FormValidation = function () {
 
                 errorPlacement: function (error, element) { // render error placement for each input type
                     var cont = $(element).parent('.input-group');
-                    if (cont.size() > 0) {
+                    if (cont) {
                         cont.after(error);
                     } else {
                         element.after(error);
@@ -257,19 +257,19 @@ var FormValidation = function () {
                     }
                 },
 
-                errorPlacement: function (error, element) { // render error placement for each input typeW
-                    if (element.parents('.mt-radio-list').size() > 0 || element.parents('.mt-checkbox-list').size() > 0) {
-                        if (element.parents('.mt-radio-list').size() > 0) {
+                errorPlacement: function (error, element) { // render error placement for each input type
+                    if (element.parents('.mt-radio-list') || element.parents('.mt-checkbox-list')) {
+                        if (element.parents('.mt-radio-list')[0]) {
                             error.appendTo(element.parents('.mt-radio-list')[0]);
                         }
-                        if (element.parents('.mt-checkbox-list').size() > 0) {
+                        if (element.parents('.mt-checkbox-list')[0]) {
                             error.appendTo(element.parents('.mt-checkbox-list')[0]);
                         }
-                    } else if (element.parents('.mt-radio-inline').size() > 0 || element.parents('.mt-checkbox-inline').size() > 0) {
-                        if (element.parents('.mt-radio-inline').size() > 0) {
+                    } else if (element.parents('.mt-radio-inline') || element.parents('.mt-checkbox-inline')) {
+                        if (element.parents('.mt-radio-inline')[0]) {
                             error.appendTo(element.parents('.mt-radio-inline')[0]);
                         }
-                        if (element.parents('.mt-checkbox-inline').size() > 0) {
+                        if (element.parents('.mt-checkbox-inline')[0]) {
                             error.appendTo(element.parents('.mt-checkbox-inline')[0]);
                         }
                     } else if (element.parent(".input-group").size() > 0) {
@@ -305,7 +305,7 @@ var FormValidation = function () {
                 submitHandler: function (form) {
                     success3.show();
                     error3.hide();
-                    //form[0].submit(); // submit the form
+                    form[0].submit(); // submit the form
                 }
 
             });

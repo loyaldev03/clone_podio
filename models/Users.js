@@ -27,9 +27,12 @@ var UserSchema = new mongoose.Schema({
 		type: Boolean,
 		default: false
 	},
-	facebook: String,
-	twitter: String,
-	linkedin: String,
+	facebook: {
+		type: mongoose.Schema.Types.Mixed
+	},
+	twitter: {
+		type: mongoose.Schema.Types.Mixed
+	},
 	default_workspace: {type: mongoose.Schema.Types.ObjectId, ref: 'Workspace'},
 	tasks: [{type: mongoose.Schema.Types.ObjectId, ref: 'Task'}],
 	workspaces: [{type: mongoose.Schema.Types.ObjectId, ref: 'Workspace'}]

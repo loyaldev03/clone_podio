@@ -84,21 +84,19 @@ angular.module('MetronicApp').controller('CreateWorkspaceModalController', [
 		'$scope', 
 		'$uibModalInstance', 
 		's_workspace', 
-		'auth', 
+		's_auth', 
 		'$state', 
 		'$location',
-		function($scope, $uibModalInstance, s_workspace, auth, $state, $location) {
+		function($scope, $uibModalInstance, s_workspace, s_auth, $state, $location) {
     $scope.createWorkspace = function()
     {
       s_workspace.create({
       	title: $scope.workspace.title, 
       	access: $scope.workspace.access, 
-      	user: auth.currentUser()})
+      	user: s_auth.currentUser()})
       .then(function(res){
-	      s_workspace.getAllWorkspaces().then(function(data){
-		      $uibModalInstance.close();
-	      	$state.go('workspaces_show', {id: res.data._id});
-	      })
+	      $uibModalInstance.close();
+      	$state.go('workspaces_show', {id: res.data._id});
       });
     };
     $scope.cancel = function()

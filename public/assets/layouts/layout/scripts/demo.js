@@ -31,7 +31,7 @@ var Demo = function() {
             $('.page-header > .page-header-inner').removeClass("container");
 
             if ($('.page-container').parent(".container").size() === 1) {
-                $('.page-container').insertAfter('body >.page-wrapper > .clearfix');
+                $('.page-container').insertAfter('body > .clearfix');
             }
 
             if ($('.page-footer > .container').size() === 1) {
@@ -43,7 +43,7 @@ var Demo = function() {
 
              $(".top-menu > .navbar-nav > li.dropdown").removeClass("dropdown-dark");
 
-            $('body > .page-wrapper > .container').remove();
+            $('body > .container').remove();
         };
 
         var lastSelectedLayout = '';

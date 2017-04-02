@@ -4,7 +4,7 @@ var FormRepeater = function () {
         //main function to initiate the module
         init: function () {
         	$('.mt-repeater').each(function(){
-                $(this).repeater({
+        		$(this).repeater({
         			show: function () {
 	                	$(this).slideDown();
                         $('.date-picker').datepicker({

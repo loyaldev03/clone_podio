@@ -16,8 +16,18 @@ var exports = module.exports;
 
 exports.createDefaultWorkspace = function(user){
   return new Promise(function(resolve, reject) {
+    var username = "unnamed";
+    if (user.username) {
+      username = user.username;
+    }
+    else if (user.facebook) {
+      username = user.facebook.name;
+    }
+    else {
+      username = user.twitter.username;
+    }
     var workspace = new Workspace({
-      title: user.username+"'s leads",
+      title: username+"'s leads",
       description: "default workspace",
       user: user._id
     });

@@ -8,8 +8,7 @@ angular.module('MetronicApp').controller('ApppController', [
 	's_appp',
 	'$stateParams',
 	'$state',
-	'current_appp',
-	function($rootScope, $scope, settings, $uibModal, $log, s_appp, $stateParams, $state, current_appp) {
+	function($rootScope, $scope, settings, $uibModal, $log, s_appp, $stateParams, $state) {
     $scope.$on('$viewContentLoaded', function() {   
         // initialize core components
         App.initAjax();
@@ -20,6 +19,8 @@ angular.module('MetronicApp').controller('ApppController', [
         $rootScope.settings.layout.pageSidebarClosed = false;
     });
    
+    $scope.current_appp = s_appp.getCurrentAppp();
+    
     $scope.createAppp = function() {
       s_appp.create({
       	name: $scope.appp.name, 
@@ -36,8 +37,6 @@ angular.module('MetronicApp').controller('ApppController', [
     $scope.updateAppp = function() {
     	$state.go('appps_show', {workspace_id: $stateParams.workspace_id, appp_id: $stateParams.appp_id});
     }
-
-    $scope.current_appp = current_appp;
 
     $scope.addItem = function() {
     	$state.go('items_new', {workspace_id: $stateParams.workspace_id, appp_id: $stateParams.appp_id});

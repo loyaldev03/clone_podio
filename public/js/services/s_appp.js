@@ -5,7 +5,8 @@ angular.module('MetronicApp')
 	's_auth', 
 	function($http, $window, s_auth){
 		var appp = {
-			all_appps: []
+			all_appps: [],
+			current_appp: {}
 		};
 
 		appp.create = function(appp) {
@@ -14,13 +15,24 @@ angular.module('MetronicApp')
 			}).success(function(appp){
 						return appp;
 			})
-		}
+			}
 		appp.get = function(id) {
 			return $http.get('/api/v1/appp/'+id, {
 				headers: {Authorization: 'Bearer '+s_auth.getToken()}
 			}).then(function(res){
 					return res.data;
 			})
+		}
+		appp.setCurrentAppp = function(id) {
+			return $http.get('/api/v1/appp/'+id, {
+				headers: {Authorization: 'Bearer '+s_auth.getToken()}
+			}).then(function(res){
+					appp.current_appp = res.data;
+					return res.data;
+			})
+		}
+		appp.getCurrentAppp = function() {
+			return appp.current_appp;
 		}
 		// appp.getAllAppps = function() {
 		// 	return $http.get('/api/v1/appps', {

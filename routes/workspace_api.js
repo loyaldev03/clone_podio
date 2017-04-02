@@ -12,9 +12,11 @@ var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId; //Have also tried Schema.Types.ObjectId, mongoose.ObjectId
 
+//import controllers
+var appp_controller = require('../controllers/appp.controller');
 //Workspace Management
 router.get('/workspaces', auth, function(req, res, next) {
-  Workspace.find({}, function(err, workspaces) {
+  Workspace.find({user: req.payload._id}, function(err, workspaces) {
     if (err) { return next(err); }
     return res.json(workspaces);
   })
@@ -32,7 +34,13 @@ router.post('/workspaces', auth, function(req, res, next) {
     if (err) { return next(err); }
     User.update({_id: workspace.user}, {$addToSet: {workspaces: workspace._id}}, function(err, user) {
       if (err) { return next(err); }
-      return res.json(workspace);
+      appp_controller.createDefaultAppp(workspace)
+      .then(function(appp) {
+        return res.json(workspace);
+      })
+      .catch(function(err) {
+        return next(err);
+      })
     });     
   });
 });

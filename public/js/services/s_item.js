@@ -30,7 +30,7 @@ angular.module('MetronicApp')
 				headers: {Authorization: 'Bearer ' + s_auth.getToken()}
 			}).then(function(res) {
 
-			})
+			})	
 		}
 		// item.create = function(item) {
 		// 	return $http.post('/api/v1/items', item, {
