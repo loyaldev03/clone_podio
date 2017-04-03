@@ -515,7 +515,7 @@ use after page reload.
 1. <img height="24" align="top" src="https://i.ytimg.com/i/bn1OgGei-DV7aSRo_HaAiw/mq1.jpg?v=4f8f2cc9"> **Client:** Open a popup window via `$auth.authenticate('provider name')`.
 2. <img height="24" align="top" src="https://i.ytimg.com/i/bn1OgGei-DV7aSRo_HaAiw/mq1.jpg?v=4f8f2cc9"> **Client:** Sign in with that provider, if necessary, then authorize the application.
 3. <img height="24" align="top" src="https://i.ytimg.com/i/bn1OgGei-DV7aSRo_HaAiw/mq1.jpg?v=4f8f2cc9"> **Client:** After successful authorization, the popup is redirected back to
-your app, e.g. *http://localhost:3000*,  with the `code` (authorization code)
+your app, e.g. *http://52.37.127.232*,  with the `code` (authorization code)
 query string parameter.
 4. <img height="24" align="top" src="https://i.ytimg.com/i/bn1OgGei-DV7aSRo_HaAiw/mq1.jpg?v=4f8f2cc9"> **Client:** The `code` parameter is sent back to the  parent window that opened the popup.
 5. <img height="24" align="top" src="https://i.ytimg.com/i/bn1OgGei-DV7aSRo_HaAiw/mq1.jpg?v=4f8f2cc9"> **Client:** Parent window closes the popup and sends a **POST**
@@ -542,8 +542,8 @@ use after page reload.
 - Then select *APIs & auth* from the sidebar and click on *Credentials* tab
 - Click **CREATE NEW CLIENT ID** button
  - **Application Type**: Web Application
- - **Authorized Javascript origins**: *http://localhost:3000*
- - **Authorized redirect URI**: *http://localhost:3000*
+ - **Authorized Javascript origins**: *http://52.37.127.232*
+ - **Authorized redirect URI**: *http://52.37.127.232*
 
 **Note:** Make sure you have turned on **Contacts API** and **Google+ API** in the *APIs* tab.
 
@@ -555,7 +555,7 @@ use after page reload.
 - Enter *Display Name*, then choose a category, then click **Create app**
 - Click on *Settings* on the sidebar, then click **+ Add Platform**
 - Select **Website**
-- Enter *http://localhost:3000* for *Site URL*
+- Enter *http://52.37.127.232* for *Site URL*
 
 <hr>
 
@@ -589,8 +589,8 @@ and specify `mylocalwebsite.net` as your *Redirect URL* in the **API Settings** 
 - Select **Applications** in the left panel
 - Go to **Developer applications** tab, then click on the **Register new application** button
  - **Application name**: Your app name
- - **Homepage URL**: *http://localhost:3000*
- - **Authorization callback URL**: *http://localhost:3000*
+ - **Homepage URL**: *http://52.37.127.232*
+ - **Authorization callback URL**: *http://52.37.127.232*
 - Click on the **Register application** button
 
 <img
@@ -604,7 +604,7 @@ width="150" />
  - **Application Description**: Your app Description
 - Click **Create**
 - Fill out the following:
- - **Redirect URIs**: *http://localhost:3000*
+ - **Redirect URIs**: *http://52.37.127.232*
 - Click **Save**
 
 <hr>
@@ -924,7 +924,7 @@ window.location.origin + '/auth/facebook/google/callback'
 ...
 ```
 
-Using the example above, a popup window will be redirected to `http://localhost:3000/auth/facebook/callback?code=YOUR_AUTHORIZATION_CODE` after a successful Facebook authorization. To avoid potential 404 errors, create server routes for each `redirectUri` URL that return **200 OK**. Or alternatively, you may render a custom template with a loading spinner. For the moment, a popup will not stay long enough to see that custom template, due to 20ms interval polling, but in the future I may add support for overriding this polling interval value.
+Using the example above, a popup window will be redirected to `http://52.37.127.232/auth/facebook/callback?code=YOUR_AUTHORIZATION_CODE` after a successful Facebook authorization. To avoid potential 404 errors, create server routes for each `redirectUri` URL that return **200 OK**. Or alternatively, you may render a custom template with a loading spinner. For the moment, a popup will not stay long enough to see that custom template, due to 20ms interval polling, but in the future I may add support for overriding this polling interval value.
 
 As far as Satellizer is concerned, it does not matter what is the value of `redirectUri` as long as it matches URL in your OAuth app settings. Satellizer's primary concern is to read URL query/hash parameters, then close a popup.
 

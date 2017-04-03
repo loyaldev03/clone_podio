@@ -7,7 +7,7 @@ MailSender.sendVerificationMessage = function(user) {
 		const sghelper = require('sendgrid').mail;
 	  var from_email = new sghelper.Email(config.get('Admin_Email'));
 	  var to_email = new sghelper.Email(user.username);
-	  var subject = 'Actodo.co Pasword Reset Token';
+	  var subject = 'Verify Your Account';
 	  var content = new sghelper.Content('text/html', 
 	           `<p> Thank you for reaching us </p>
 	            <p> <a href="` + `http://localhost:3000` + `/#/activate/`+user._id+`">Please verify your account here</a></p>`);
