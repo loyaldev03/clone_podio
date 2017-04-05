@@ -9,10 +9,12 @@ function($scope, $state, s_auth, $location, $stateParams, $auth){
   $scope.user = {};
 
   $scope.submitted = false;
+  $scope.error = "";
+  $scope.login_submitted = false; 
+  $scope.error_for_login = "";
 
   $scope.register = function(){
     $scope.submitted = true;
-    $scope.error = "";
     if (!($scope.user.full_name && $scope.user.username && $scope.user.email && $scope.user.password)) {
       $scope.error = "Please fill out all fields for registration";
     }
@@ -34,11 +36,17 @@ function($scope, $state, s_auth, $location, $stateParams, $auth){
   }
   
   $scope.logIn = function(){
-    s_auth.logIn($scope.user).error(function(error){
-      $scope.error = error;
-    }).then(function(){
-      $state.go( "verify_account" );
-    });
+    $scope.login_submitted = true;
+    if (!($scope.user.username && $scope.user.password)) {
+      $scope.error_for_login = "Please fill out all fields for registration";      
+    }
+    else {
+      s_auth.logIn($scope.user).error(function(error){
+        $scope.error_for_login = error.message;
+      }).then(function(){
+        $state.go( "verify_account" );
+      });
+    }
   };
 
   $scope.logOut = function() {
