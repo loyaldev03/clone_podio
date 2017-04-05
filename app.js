@@ -18,6 +18,7 @@ require('./models/Appps');
 require('./models/Items');
 require('./models/Fields');
 require('./models/Values');
+require('./models/Properties');
 require('./config/passport');
 
 var index = require('./routes/index');
@@ -28,6 +29,7 @@ var appp_api = require('./routes/appp_api');
 var item_api = require('./routes/item_api');
 var social_login = require('./routes/social_login');
 var field_api = require('./routes/field_api');
+var property_api = require('./routes/property_api');
 
 var app = express();
 
@@ -51,6 +53,7 @@ app.use('/api/v1/', workspace_api);
 app.use('/api/v1/', appp_api);
 app.use('/api/v1/', item_api);
 app.use('/api/v1/', field_api);
+app.use('/api/v1/', property_api);
 app.use('/', social_login);
 
 // catch 404 and forward to error handler

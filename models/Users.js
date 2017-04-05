@@ -4,25 +4,12 @@ var jwt = require('jsonwebtoken');
 
 var UserSchema = new mongoose.Schema({
 	username: String,
-	hash: String,
-	salt: String, 
-	title: String,
-	role: String,
-	image: String,
-	about: String,
-	skills: String,
 	email: String,
-	phone: String,
-	website: String,
-	skype: String,
-	linkedin: String,
-	twitter: String,
-	location: String,
-	address: String,
-	city: String,
-	zip: String,
-	state: String,
-	country:String,
+	organization: String,
+	full_name: String,
+	hash: String,
+	salt: String,
+	verification_token: String, 
 	activated: {
 		type: Boolean,
 		default: false
@@ -31,6 +18,9 @@ var UserSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.Mixed
 	},
 	twitter: {
+		type: mongoose.Schema.Types.Mixed
+	},
+	google: {
 		type: mongoose.Schema.Types.Mixed
 	},
 	default_workspace: {type: mongoose.Schema.Types.ObjectId, ref: 'Workspace'},
@@ -60,6 +50,7 @@ UserSchema.methods.generateJWT = function() {
 		_id: this._id,
 		username: this.username,
 		activated: this.activated,
+		organization: this.organization,
 		exp: parseInt(exp.getTime() / 1000),
 	}, 'SECRET');
 }

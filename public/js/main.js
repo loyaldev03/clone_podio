@@ -65,6 +65,9 @@ MetronicApp.controller('AppController', [
         $scope.isActivated = function(){
             return s_auth.isActivated();
         }
+        $scope.isOrganized = function(){
+            return s_auth.isOrganized();
+        }
 }]);
 
 /***
@@ -89,12 +92,7 @@ MetronicApp.controller('HeaderController', [
         s_auth.logOut();
         $location.path('/login');
     }
-    $scope.newProperty = function() {
-        $state.go('properties_new', {workspace_id: $rootScope.current_workspace._id});
-    }
-    $scope.newAppp = function() {
-        $state.go('appps_new', {workspace_id: $rootScope.current_workspace._id});
-    }
+
     $scope.$watch(function(){
         return $location.path();
     }, function(value){
@@ -148,6 +146,10 @@ MetronicApp.controller('SidebarController', [
     $scope.goto = function(workspace) {
       $state.go('workspaces_show', {id: workspace._id});
     }    
+
+    $scope.manageWorkspace = function() {
+        $state.go('workspaces');
+    }
 }]);
 
 /* Setup Layout Part - Quick Sidebar */
@@ -251,20 +253,56 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             }          
         })
         .state('activate', {
-            url: "/activate/:id",
+            url: "/activate/:email/:token",
             controller: "AuthController",
             onEnter: ['$stateParams', 's_auth', '$state', function($stateParams, s_auth, $state) {
-                s_auth.activate($stateParams.id).then(function(res) {
-                    $state.go('dashboard');
+                s_auth.activate($stateParams.email, $stateParams.token).then(function(res) {
+                    $state.go('organization');
                 })
             }]
         })
-        .state('login_with_social', {
-            url: '/login_with_social/:jwt_token',
+        .state('register_with_social', {
+            url: '/register_with_social/:email',
             controller: "AuthController",
             onEnter: ['$stateParams', 's_auth', '$state', function($stateParams, s_auth, $state){
-                s_auth.saveToken($stateParams.jwt_token);
-                $state.go('dashboard');
+                s_auth.setEmail($stateParams.email);
+                $state.go('register');
+            }]
+        })
+        .state('register_with_twitter', {
+            url: '/register_with_twitter/:twitter_id',
+            controller: "AuthController",
+            onEnter: ['$stateParams', 's_auth', '$state', function($stateParams, s_auth, $state){
+                s_auth.setTwitterID($stateParams.twitter_id);
+                $state.go('register');
+            }]
+        })
+        .state('login_with_social', {
+            url: '/login_with_social/:token',
+            controller: "AuthController",
+            onEnter: ['$stateParams', 's_auth', '$state', function($stateParams, s_auth, $state){
+                s_auth.setToken($stateParams.token);
+                $state.go('verify_account');
+            }]
+        })
+        .state('verify_account', {
+            url: "/verifyaccount",
+            templateUrl: "views/authenticate/verify_account.html",
+            controller: "AuthController",
+            onEnter: ['s_auth', '$state', function(s_auth, $state){
+                if (s_auth.isActivated()) {
+                    $state.go('dashboard');
+                }
+            }]
+        })
+        .state('organization', {
+            url: '/organization',
+            templateUrl: "views/authenticate/organization.html",
+            controller: "AuthController",
+            onEnter: ['s_auth', '$state', function(s_auth, $state) {
+                if (!s_auth.isLoggedIn()) {
+                    $state.go('login');
+                }
             }]
         })
         // Dashboard
@@ -304,11 +342,21 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             controller: "WorkspaceController",
             resolve: {
                 current_workspace: ['s_workspace', '$stateParams', function(s_workspace, $stateParams) {
-                    return s_workspace.get($stateParams.id);
+                    return s_workspace.setCurrentWorkspace($stateParams.id);
                 }]
             }
         })
-
+        .state('workspaces', {
+            url: "/workspaces",
+            templateUrl: "views/workspaces/index.html",
+            data: {},
+            controller: "WorkspaceController",
+            resolve: {
+                getAllWorkspaces: ['s_workspace', function(s_workspace){
+                    return s_workspace.initializeAllWorkspaces();
+                }]
+            }   
+        })
         .state('appps_new', {
             url: "/workspace/:workspace_id/apps/new",
             templateUrl: "views/appps/new.html",            
@@ -372,15 +420,12 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             data: {pageTitle: 'New Property'},
             controller: "PropertyController",
             resolve: {
-                initializePropertyFields: ['$stateParams', 's_property', function($stateParams, s_property){
-                    return s_property.getPropertyFields($stateParams.workspace_id);
-                }]                
             }
         })
         .state('properties_index', {
-            url: "/workspace/:workspace_id/properties/index",
+            url: "/workspace/:workspace_id/properties",
             templateUrl: "views/properties/index.html",
-            data: {pageTitle: 'New Property'},
+            data: {},
             controller: "PropertyController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -399,18 +444,20 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                     });
                 }],
                 getProperties:['s_property', '$stateParams', function(s_property, $stateParams){
-                    return s_property.getPropertiesForWorkspace($stateParams.workspace_id);
+                    return s_property.getProperties($stateParams.workspace_id);
                 }]               
             }
         })
 
-        .state('properties_edit/', {
+        .state('properties_edit', {
             url: "/workspace/:workspace_id/properties/:property_id/edit",
             templateUrl: "views/properties/edit.html",
             data: {pageTitle: 'Property Update'},
             controller: "PropertyController",
             resolve: {
-                
+                getProperty: ['$stateParams', 's_property', function($stateParams, s_property){
+                    return s_property.getProperty($stateParams.property_id);
+                }]
             }
         })
 

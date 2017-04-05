@@ -5,6 +5,7 @@ var User = mongoose.model('User');
 var config = require('config');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 //import controllers
 var workspace_controller = require('../controllers/workspace.controller');
@@ -67,25 +68,17 @@ passport.use('facebook', new FacebookStrategy({
                   facebook.name  = profile.name.givenName + ' ' + profile.name.familyName; // look at the passport user profile to see how names are returned
                   facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
                   newUser.facebook = facebook;
-                  newUser.activated = true;
+                  newUser.email = facebook.email;
+                  // newUser.activated = true;
                   // save our user to the database
                   newUser.save(function(err) {
                       if (err)
                           throw err;
-                      // if successful, create default workspace and return user
-											workspace_controller.createDefaultWorkspace(newUser)
-													.then(function(workspace){
-			                      return done(null, newUser);
-													})
-													.catch(function(err) {
-														return done(err);
-													})                      
+                      return done(null, newUser);
                   });
               }
-
           });
       });
-
   }
 ));
 
@@ -121,22 +114,56 @@ function(token, tokenSecret, profile, done) {
                 twitter.username    = profile.username;
                 twitter.displayName = profile.displayName;
                 newUser.twitter = twitter;
-                newUser.activated = true;
                 // save our user into the database
                 newUser.save(function(err) {
                     if (err)
                         throw err;
-										workspace_controller.createDefaultWorkspace(newUser)
-												.then(function(workspace){
-		                      return done(null, newUser);
-												})
-												.catch(function(err) {
-													return done(err);
-												})                       
+                    return done(null, newUser);
                 });
             }
         });
+    });
+}));
 
-});
+
+passport.use(new GoogleStrategy({
+    clientID        : config.get('Google.clientID'),
+    clientSecret    : config.get('Google.clientSecret'),
+    callbackURL     : config.get('Google.callbackURL'),
+},
+function(token, refreshToken, profile, done) {
+    // make the code asynchronous
+    // User.findOne won't fire until we have all our data back from Google
+    process.nextTick(function() {
+
+        // try to find the user based on their google id
+        User.findOne({ 'google.id' : profile.id }, function(err, user) {
+            if (err)
+                return done(err);
+
+            if (user) {
+
+                // if a user is found, log them in
+                return done(null, user);
+            } else {
+                // if the user isnt in our database, create a new user
+                var newUser          = new User();
+                var google = {};
+                // set all of the relevant information
+                google.id    = profile.id;
+                google.token = token;
+                google.name  = profile.displayName;
+                google.email = profile.emails[0].value; // pull the first email
+                newUser.google = google;
+                newUser.email = google.email;
+                // save the user
+                newUser.save(function(err) {
+                    if (err)
+                        throw err;
+                    return done(null, newUser);
+                });
+            }
+        });
+    });
 
 }));

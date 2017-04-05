@@ -1,4 +1,25 @@
-
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a ui-sref="dashboard">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a ui-sref="workspaces">Workspaces</a>
+            <i class="fa fa-circle"></i>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+        	<button type="button" class="btn btn-sm btn-default" ng-click="newAppp()">
+        		Add App
+        	</button>
+        	<button type="button" class="btn btn-sm btn-default" ng-click="propertyIndex()">
+        	  Add Property
+        	</button>
+        </div>
+    </div>
+</div>
 <!-- BEGIN MAIN CONTENT -->
 <div class="workspace-detail">
     <div class="row">

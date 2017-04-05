@@ -100,6 +100,38 @@ router.post('/workspaces/:workspace_id/properties', auth, function(req, res, nex
   })
 })
 
+router.put('/workspaces/:workspace_id/properties/:property_id', auth, function(req, res, next) {
+  Workspace.findById(req.params.workspace_id, function(err, workspace){
+    var item = new Item({appp: workspace.default_appp})
+      fields_list = [];
+      for (field in req.body) {
+        if (field != "appp") { 
+          item.fields.push(field);
+        }
+      }
+      item.save(function(err, item) {
+        if (err) { return next(err); }
+        Appp.update({_id: workspace.default_appp}, {$addToSet: {items: item._id}}, function(err, appp) {
+          if (err) {
+            return next(err);
+          }
+          for (field in req.body) {
+            if (field != "appp") { 
+              fields_list.push(item_controller.createValue(item._id, field, req.body[field]));
+            }
+          }
+          Promise.all(fields_list)
+          .then(function(_res) {
+            return res.json(item);
+          })
+          .catch(function(err) {
+            return next(err);
+          })
+        });
+      });    
+  })
+})
+
 router.get('/workspaces/:workspace_id/properties', auth, function(req, res, next){
   Workspace.findById(req.params.workspace_id, function(err, workspace){
     if (err) {

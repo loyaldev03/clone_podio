@@ -12,25 +12,22 @@
   <div class="content">
     <form class="" method="post" ng-submit="register()">
         <h3 class="font-green">Sign Up</h3>
-        <p class="hint"> Enter your personal details below: </p>
+        <span id="error" class="help-block">{{error}}</span>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">Full Name</label>
+            <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Full Name" ng-model="user.full_name" /> </div>
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">Username</label>
-            <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username" ng-model="user.username" /> </div>
+            <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="User Name" ng-model="user.username" /> </div>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">Email</label>
+            <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" ng-model="user.email" /> </div>
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">Password</label>
-            <input class="form-control placeholder-no-fix" type="password" autocomplete="off" id="register_password" placeholder="Password" name="password" ng-model="user.password" /> </div>
-        <div class="form-group margin-top-20 margin-bottom-20">
-            <label class="mt-checkbox mt-checkbox-outline">
-                <input type="checkbox" name="tnc" /> I agree to the
-                <a href="javascript:;">Terms of Service </a> &
-                <a href="javascript:;">Privacy Policy </a>
-                <span></span>
-            </label>
-            <div id="register_tnc_error"> </div>
-        </div>
+            <input class="form-control placeholder-no-fix" type="password" autocomplete="off" id="register_password" placeholder="Password" ng-model="user.password" /> </div>
         <div class="form-actions">
-            <button type="button" id="register-back-btn" class="btn green btn-outline">Back</button>
-            <button type="submit" id="register-submit-btn" class="btn btn-success uppercase pull-right">Submit</button>
+            <button type="button" id="register-back-btn" class="btn green btn-outline" ng-click="gotoLogin()">Back</button>
+            <button type="submit" id="register-submit-btn" class="btn btn-success uppercase pull-right">Register</button>
         </div>
     </form>
   </div>

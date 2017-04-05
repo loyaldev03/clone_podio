@@ -7,7 +7,8 @@ var WorkspaceSchema = new mongoose.Schema({
 	default_appp: {type: mongoose.Schema.Types.ObjectId, ref: 'Appp'},
 	user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	appps: [{type: mongoose.Schema.Types.ObjectId, ref: 'Appp'}],
-	tasks: [{type: mongoose.Schema.Types.ObjectId, ref: 'Task'}]
+	properties: [{type: mongoose.Schema.Types.ObjectId, ref: 'Property'}],
+	tasks: [{type: mongoose.Schema.Types.ObjectId, ref: 'Task'}],
 });
 
 mongoose.model('Workspace', WorkspaceSchema);

@@ -5,9 +5,10 @@ angular.module('MetronicApp').controller('WorkspaceController', [
 	'settings', 
 	'$uibModal', 
 	'$log', 
-	'current_workspace',
 	's_workspace',
-	function($rootScope, $scope, settings, $uibModal, $log, current_workspace, s_workspace) {
+	'$stateParams',
+	'$state',
+	function($rootScope, $scope, settings, $uibModal, $log, s_workspace, $stateParams, $state) {
     $scope.$on('$viewContentLoaded', function() {   
         // initialize core components
         App.initAjax();
@@ -18,9 +19,48 @@ angular.module('MetronicApp').controller('WorkspaceController', [
         $rootScope.settings.layout.pageSidebarClosed = false;
     });
 
-    $scope.current_workspace = current_workspace;
-    $rootScope.current_workspace = current_workspace;
-    s_workspace.current_workspace = current_workspace;
+    $scope.current_workspace = s_workspace.getCurrentWorkspace();
+    $rootScope.current_workspace = s_workspace.getCurrentWorkspace();
+    s_workspace.current_workspace = s_workspace.getCurrentWorkspace();
+    
+    $scope.all_workspaces = function() {
+    	return s_workspace.getAllWorkspaces();
+    }
+
+    $scope.remove = function(workspace_id) {
+    	s_workspace.remove(workspace_id);
+    }
+
+    $scope.update = function(workspace) {
+    	s_workspace.update(workspace);
+    }
+
+    $scope.edit = function(workspace_id) {
+    	s_workspace.setEditWorkspace(workspace_id).then(function(res) {
+				var out = $uibModal.open(
+	      {
+	          animation: $scope.animationsEnabled,
+	          templateUrl: "views/workspaces/edit.html",
+	          controller: "CreateWorkspaceModalController",
+	          size: "",
+	          resolve: {
+	          }
+	      });
+	      out.result.then(function(value)
+	      {
+	          $scope.selected = value;
+	      }, function()
+	      {
+	          console.log("Modal dismissed at: " + new Date);
+	      });    	    		
+    	});
+    }
+    $scope.propertyIndex = function() {
+        $state.go('properties_index', {workspace_id: $stateParams.id});
+    }
+    $scope.newAppp = function() {
+        $state.go('appps_new', {workspace_id: $stateParams.id});
+    }    
 }]);
 
 angular.module('MetronicApp').controller('WorkspaceModalDialogHelperController', [
@@ -90,10 +130,8 @@ angular.module('MetronicApp').controller('CreateWorkspaceModalController', [
 		function($scope, $uibModalInstance, s_workspace, s_auth, $state, $location) {
     $scope.createWorkspace = function()
     {
-      s_workspace.create({
-      	title: $scope.workspace.title, 
-      	access: $scope.workspace.access, 
-      	user: s_auth.currentUser()})
+    	$scope.workspace.user = s_auth.currentUser();
+      s_workspace.create($scope.workspace)
       .then(function(res){
 	      $uibModalInstance.close();
       	$state.go('workspaces_show', {id: res.data._id});
@@ -104,4 +142,11 @@ angular.module('MetronicApp').controller('CreateWorkspaceModalController', [
       $uibModalInstance.dismiss('cancel');
     };
 
+    $scope.edit_workspace = s_workspace.getEditWorkspace();
+
+    $scope.updateWorkspace = function() {
+    	s_workspace.update($scope.edit_workspace).then(function(res){
+	      $uibModalInstance.close();
+    	});
+    }
 }]);

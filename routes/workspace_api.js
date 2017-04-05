@@ -45,16 +45,18 @@ router.post('/workspaces', auth, function(req, res, next) {
   });
 });
 router.put('/workspace/:id', auth, function(req, res, next) {
-  Workspace.update({_id: req.params.id}, req.body, function(err, workspace) {
+  debugger;
+  Workspace.update({_id: req.params.id}, req.body, function(err, updated) {
     if (err) { return next(err); }
-    return res.json(workspace);
+    return res.json(updated);
   });
 });
 router.delete('/workspace/:id', auth, function(req, res, next) {
-  Workspace.remove({_id: req.params.id}, function(err, workspace) {
+  Workspace.remove({_id: req.params.id}, function(err, removed) {
     if (err) { return next(err); }
-    return res.json(workspace);
+    return res.json(removed);
   });
 });
+
 
 module.exports = router;
