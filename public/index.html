@@ -59,33 +59,30 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- DOC: Apply "page-full-width" class to the body element to have full width page without the sidebar menu -->
 
     <body ng-controller="AppController" class="page-header-fixed page-sidebar-closed-hide-logo" ng-class="{'page-content-white': settings.layout.pageContentWhite,'page-container-bg-solid': settings.layout.pageBodySolid, 'page-sidebar-closed': settings.layout.pageSidebarClosed}">
-        <div ng-if="isLoggedIn() && isOrganized()">
-            <div ng-if="isActivated()">
-                <div ng-spinner-bar class="page-spinner-bar">
-                    <div class="bounce1"></div>
-                    <div class="bounce2"></div>
-                    <div class="bounce3"></div>
-                </div>
-                <div data-ng-include="'tpl/header.html'" data-ng-controller="HeaderController" class="page-header navbar navbar-fixed-top"> </div>
-                <div class="clearfix"> </div>
-                <div class="page-container">
-                    <div data-ng-include="'tpl/sidebar.html'" data-ng-controller="SidebarController" class="page-sidebar-wrapper"> </div>
-                    <div class="page-content-wrapper">
-                        <div class="page-content">
-                            <div data-ng-include="'tpl/theme-panel.html'" data-ng-controller="ThemePanelController" class="theme-panel hidden-xs hidden-sm"> </div>
-                            <div ui-view class="fade-in-up"> </div>
-                        </div>
-                    </div>
-                    <a href="javascript:;" class="page-quick-sidebar-toggler">
-                        <i class="icon-login"></i>
-                    </a>
-                    <div data-ng-include="'tpl/quick-sidebar.html'" data-ng-controller="QuickSidebarController" class="page-quick-sidebar-wrapper"></div>
-                </div>
-                <div data-ng-include="'tpl/footer.html'" data-ng-controller="FooterController" class="page-footer"> </div>
+        <div ng-if="isLoggedIn()">
+            <div ng-spinner-bar class="page-spinner-bar">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
             </div>
-            <div ui-view class="fade-in-up" ng-if="!isActivated()"> </div>
+            <div data-ng-include="'tpl/header.html'" data-ng-controller="HeaderController" class="page-header navbar navbar-fixed-top"> </div>
+            <div class="clearfix"> </div>
+            <div class="page-container">
+                <div data-ng-include="'tpl/sidebar.html'" data-ng-controller="SidebarController" class="page-sidebar-wrapper"> </div>
+                <div class="page-content-wrapper">
+                    <div class="page-content">
+                        <div data-ng-include="'tpl/theme-panel.html'" data-ng-controller="ThemePanelController" class="theme-panel hidden-xs hidden-sm"> </div>
+                        <div ui-view class="fade-in-up"> </div>
+                    </div>
+                </div>
+                <a href="javascript:;" class="page-quick-sidebar-toggler">
+                    <i class="icon-login"></i>
+                </a>
+                <div data-ng-include="'tpl/quick-sidebar.html'" data-ng-controller="QuickSidebarController" class="page-quick-sidebar-wrapper"></div>
+            </div>
+            <div data-ng-include="'tpl/footer.html'" data-ng-controller="FooterController" class="page-footer"> </div>
         </div>
-        <div ui-view class="fade-in-up" ng-if="!isLoggedIn() || !isOrganized()"> </div>
+        <div ui-view class="fade-in-up" ng-if="!isLoggedIn()"> </div>
 
         <!-- END QUICK NAV -->
         <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
