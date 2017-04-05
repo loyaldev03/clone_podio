@@ -300,9 +300,9 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             templateUrl: "views/authenticate/organization.html",
             controller: "AuthController",
             onEnter: ['s_auth', '$state', function(s_auth, $state) {
-                if (!s_auth.isLoggedIn()) {
-                    $state.go('login');
-                }
+                // if (!s_auth.isLoggedIn() && !s_auth.isActivate()) {
+                //     $state.go('login');
+                // }
             }]
         })
         // Dashboard

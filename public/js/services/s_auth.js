@@ -18,7 +18,7 @@ angular.module('MetronicApp')
 
 		if (token) {
 			var payload = JSON.parse($window.atob(token.split('.')[1]));
-			return (payload.organization != "" && payload.activated && payload.exp > Date.now() / 1000);
+			return (payload.organization && payload.activated && payload.exp > Date.now() / 1000);
 		} else {
 			return false;
 		}
