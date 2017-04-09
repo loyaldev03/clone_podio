@@ -18,7 +18,7 @@
 		var twitter_id = req.body.twitter_id;
 
 		if (!register_user.username || !register_user.password) {
-			return res.status(400).json({message: 'Please fill out all fields'});
+			return res.status(401).json({message: 'Please fill out all fields'});
 		}
 		User.findOne({email: register_user.email}, function(err, _user){
 			if (err) {
@@ -32,7 +32,7 @@
 			user.verification_token =  uid(32);
 			if (_user) {
 				if (_user.hash) {
-					return res.status(400).json({message: 'The email is already registered with us'});	 
+					return res.status(401).json({message: 'The email is already registered with us'});	 
 				}
 				else {
 					user._id = _user._id;
@@ -121,9 +121,8 @@
 
 	router.post('/login', function(req, res, next) {
 		if (!req.body.username || !req.body.password) {
-			return res.status(400).json({message: 'Please fill out all fields'});
+			return res.status(401).json({message: 'empty fields'});
 		}
-		
 		passport.authenticate('local', function(err, user, info){
 			if (err) {return next(err);}
 			if (user) {
@@ -153,3 +152,14 @@
 	})
 
 	module.exports = router;
+
+router.post('/send_confirmation_email/:email', function(req, res, next){
+	User.findOne({email: req.params.email}, function(err, user){
+		if (err) {
+			return next(err);
+		}
+		MailSender.sendVerificationMessage(user).then(function(_res){
+    	res.redirect("/#/verify/");
+		});
+	})
+})

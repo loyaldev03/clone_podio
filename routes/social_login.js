@@ -46,6 +46,7 @@ router.get('/auth/google/callback',
       else {
         res.redirect("/#/login_with_social/" + req.user.generateJWT());
       }
+      // res.redirect("/#/register");
     }
 );
 

@@ -10,33 +10,243 @@
         <button type="button" class="btn btn-sm btn-default" ng-controller="ApppModalDialogHelperController" ng-click="modifyTemplate()"> Modify Template </button>
     </ul>
 </div>
-<!-- <div class="row">
-    <form class="" ng-submit="createProperty()">
-        <div class="form-group" ng-repeat = "field in fields">
-      <label class="control-label">{{field.name}}</label>
-      <input ng-if="field.type == 'text'" class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" ng-model="property[field._id]" />
-    </div>
-    <button type="submit" class="btn btn-primary">Ok</button>
-  </form>
-</div> -->
 <div class="row">
     <form class="" ng-submit="update()">
-        <div class="form-group">
-            <label class="control-label">Property Type</label>
-            <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" ng-model="property.property_type" />
+        <div class="row property-new-block">
+            <div class="col-sm-4">
+                <h3> Contact Info </h3>
+                <hr>
+                <div class="form-group">
+                    <label class="control-label">First Name</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.contact_info.first_name" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Last Name</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.contact_info.last_name" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Email</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.contact_info.email" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Phone</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.contact_info.phone" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Mobile</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.contact_info.mobile" />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h3> Address </h3>
+                <hr>
+                <div class="form-group">
+                    <label class="control-label">Address</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.address.address" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">City</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.address.city" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">State</label>
+                    <ui-select ng-model="property.address.state" theme="bootstrap">
+                        <ui-select-match placeholder="Select State">{{$select.selected}}</ui-select-match>
+                        <ui-select-choices repeat="item in states">
+                            <div ng-bind-html="item"></div>
+                        </ui-select-choices>
+                    </ui-select>                                   
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Country</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.address.country" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Zip</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.address.zip" />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h3> Lead Info </h3>
+                <hr>
+                <div class="form-group">
+                    <label class="control-label">Lead Source</label>
+                    <select  class="form-control input-xlarge select2me" data-placeholder="Select..." ng-model="property.lead_info.lead_source">
+                        <option value="">Select</option>
+                        <option value="undefined">Bandit Signs</option><option value="undefined">Website</option><option value="undefined">Direct Mail</option><option value="undefined">Newspaper</option><option value="undefined">Craigslist</option><option value="undefined">Realtor</option><option value="undefined">Wholesaler</option><option value="undefined">Referral</option><option value="undefined">Flyer</option><option value="undefined">Other</option><option value="undefined">SellYourNJhome.com</option><option value="undefined">RyanPal.com</option><option value="undefined">NjBirdDogs.com</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Date Entered</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.lead_info.date_entered" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Entered By</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.lead_info.entered_by" />
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label class="control-label">Property Condition</label>
-            <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" ng-model="property.property_condition" />
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Property Info</h3>
+                <hr>
+                <div class="form-group">
+                    <label class="control-label">Property Type</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.property_info.property_type" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Property Condition</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.property_info.property_condition" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Beds</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.property_info.beds" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Baths</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.property_info.baths" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">SqFt</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.property_info.sqft" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Lot</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.property_info.lot" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Block</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.property_info.block" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Tax ID</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.property_info.tax_id" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Lot Size</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.property_info.lot_size" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Asking Price</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.property_info.asking_price" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Occupancy</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.property_info.occupancy" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">LockBox Code</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="1" autocomplete="off" ng-model="property.property_info.lockbox_code" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <h3>Property Questionnaire</h3>
+                <hr>
+                <div class="row property-new-block">
+                    <h5>Repairs Needed</h5>
+                    <div class="form-group col-sm-4">
+                        <input type="checkbox" ng-model="property.property_questionnaire.roof">
+                        <label class="control-label">Roof</label>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <input type="checkbox" ng-model="property.property_questionnaire.kitchen">
+                        <label class="control-label">Kitchen</label>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <input type="checkbox" ng-model="property.property_questionnaire.baths">
+                        <label class="control-label">Bath(s)</label>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <input type="checkbox" ng-model="property.property_questionnaire.paint">
+                        <label class="control-label">Paint</label>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <input type="checkbox" ng-model="property.property_questionnaire.carpet">
+                        <label class="control-label">Carpet</label>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <input type="checkbox" ng-model="property.property_questionnaire.windows">
+                        <label class="control-label">Windows</label>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <input type="checkbox" ng-model="property.property_questionnaire.furnance">
+                        <label class="control-label">Furnance</label>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <input type="checkbox" ng-model="property.property_questionnaire.drywall">
+                        <label class="control-label">Drywall</label>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <input type="checkbox" ng-model="property.property_questionnaire.plumbing">
+                        <label class="control-label">Plumbing</label>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <input type="checkbox" ng-model="property.property_questionnaire.electrical">
+                        <label class="control-label">Electrical</label>
+                    </div>
+                </div>
+                <div class="row property-new-block">
+                    <div class="form-group">
+                        <label class="control-label">Other Repairs/Details</label>
+                        <textarea rows="4" cols="50" ng-model="property.property_questionnaire.other_repairs"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Is there any underground oil tanks?</label>
+                    <input type="checkbox" checked class="make-switch" data-size="small" ng-model="property.property_questionnaire.underground_oli_tanks">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Are there any foundation issues?</label>
+                    <input type="checkbox" checked class="make-switch" data-size="small" ng-model="property.property_questionnaire.foundation_issues">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Is there any presence of mold?</label>
+                    <input type="checkbox" checked class="make-switch" data-size="small" ng-model="property.property_questionnaire.presence_of_mold">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Is there property located in a flood zone?</label>
+                    <input type="checkbox" checked class="make-switch" data-size="small" ng-model="property.property_questionnaire.property_located_in_flood_zone">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Do you have any liens and/or mortgages on the property?</label>
+                    <input type="checkbox" checked class="make-switch" data-size="small" ng-model="property.property_questionnaire.liens_or_mortgages">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Are the taxes current?</label>
+                    <input type="checkbox" checked class="make-switch" data-size="small" ng-model="property.property_questionnaire.taxes_current">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Is your property listed with a Realtor?</label>
+                    <input type="checkbox" checked class="make-switch" data-size="small" ng-model="property.property_questionnaire.listed_with_realtor">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Notes/Comments or Anything the homeowner would like to share</label>
+                    <textarea rows="4" cols="50" ng-model="property.property_questionnaire.notes_to_share"></textarea>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <h3>Status</h3>
+                <hr>
+                <div class="form-group">
+                    <label class="control-label">Property Status*</label>
+                    <select class="form-control input-xlarge select2me" data-placeholder="Select..." ng-model="property.status.property_status">
+                        <option value=""></option>
+                        <option value="AL">Alabama</option>
+                        <option value="WY">Wyoming</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Priority*</label>
+                    <select class="form-control input-xlarge select2me" data-placeholder="Select..." ng-model="property.status.priority">
+                        <option value=""></option>
+                        <option value="AL">Alabama</option>
+                        <option value="WY">Wyoming</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary">Ok</button>
+            </div>
         </div>
-        <div class="form-group">
-            <label class="control-label">Beds</label>
-            <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" ng-model="property.beds" />
-        </div>
-        <div class="form-group">
-            <label class="control-label">Baths</label>
-            <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" ng-model="property.baths" />
-        </div>
-    <button type="submit" class="btn btn-primary">Ok</button>
   </form>
 </div>

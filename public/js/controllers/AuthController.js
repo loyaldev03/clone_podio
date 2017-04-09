@@ -15,16 +15,11 @@ function($scope, $state, s_auth, $location, $stateParams, $auth){
 
   $scope.register = function(){
     $scope.submitted = true;
-    if (!($scope.user.full_name && $scope.user.username && $scope.user.email && $scope.user.password)) {
-      $scope.error = "Please fill out all fields for registration";
-    }
-    if ($scope.user.full_name && $scope.user.username && $scope.user.email && $scope.user.password) {
-      s_auth.register($scope.user).error(function(error){
-        $scope.error = error.message;
-      }).then(function(){
-        $state.go( "verify_account" );
-      });
-    } 
+    s_auth.register($scope.user).error(function(error){
+      $scope.error = error.message;
+    }).then(function(){
+      $state.go( "verify_account" );
+    });
   };
 
   $scope.registerOrganization = function() {
@@ -37,18 +32,27 @@ function($scope, $state, s_auth, $location, $stateParams, $auth){
   
   $scope.logIn = function(){
     $scope.login_submitted = true;
-    if (!($scope.user.username && $scope.user.password)) {
-      $scope.error_for_login = "Please fill out all fields for registration";      
-    }
-    else {
-      s_auth.logIn($scope.user).error(function(error){
-        $scope.error_for_login = error.message;
-      }).then(function(){
-        $state.go( "verify_account" );
-      });
-    }
+    s_auth.logIn($scope.user).error(function(error){
+      if (error.message == "wrong username") {
+        $scope.error_for_login = "This LinkaBee account doens't exist. Enter in a different account or create one <a href='/#/register'>here</a>.";
+      }
+      else if (error.message == "wrong password") {
+        $scope.error_for_login = "Invalid password. Please try again.";
+      }
+      else if (error.message == "not verified yet") {
+        $scope.error_for_login = "Sorry, your account was never verified. <a href='/#/register'>Sign up</a> for a new one or click here to receive a <a href='/sendActivationEmail/" + $scope.user.username + "' ng-click='gotoLogin()'>new confirmation link</a>.";
+      }
+      else if (error.message == "empty fields") {
+        $scope.error_for_login = "The username and password fields are required";
+      }
+    }).then(function(){
+      $state.go( "verify_account" );
+    });
   };
 
+  $scope.activate = function(username) {
+    console.log(username);
+  }
   $scope.logOut = function() {
     s_auth.logOut($scope.user).error(function(error){
       $scope.error = error;
@@ -76,6 +80,15 @@ function($scope, $state, s_auth, $location, $stateParams, $auth){
     $state.go('login');
   }
 
+  $scope.getEmail = function() {
+    return s_auth.getEmail();
+  }
+
+  $scope.sendConfirmationEmail = function() {
+    s_auth.sendConfirmationEmail().then(function(res){
+      $state.go("verify");
+    });
+  }
   $scope.user = {};
   //for profile registration page with social login
   $scope.user.email = s_auth.getEmail();

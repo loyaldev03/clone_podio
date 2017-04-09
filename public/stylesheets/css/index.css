@@ -1,6 +1,9 @@
 .portlet-body {
   height: 340px; }
 
+.page-content-white .page-bar {
+  padding: 0 0; }
+
 .select-appp-box {
   height: 200px;
   border: 1px solid black; }
@@ -27,3 +30,9 @@
 
 .help-block {
   color: #e73d4a; }
+
+.row.property-new-block {
+  margin-left: 0px; }
+
+.input-group {
+  margin: 0 0; }

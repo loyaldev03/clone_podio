@@ -14,7 +14,7 @@ exports.sendVerificationMessage = function(user) {
 						  <h1 style="color:#5091bd;font-size:24px;">Account verification</h1><br>
 						  <p style="font-family:Helvetica, Arial, sans-serif;font-size:16px;">Confirm your email address to activate your account<br><br></p>
 						  <a rel="nofollow" target="_blank" href=http://localhost:3000/#/activate/` + user.email + `/` + user.verification_token + `" style="color:#fff;background-color:#5fc55f;border-color:#5fc55f;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;padding:16px 40px;font-size:16px;text-decoration:none;">CONFIRM </a><br><br>            
-						  <p style="font-family:Helvetica, Arial, sans-serif;font-size:16px;">Thanks for signing up. Click green button to confirm that <br>` + user.email + `is your email address and get started<br>
+						  <p style="font-family:Helvetica, Arial, sans-serif;font-size:16px;">Thanks for signing up. Click green button to confirm that <br>` + `<a rel="nofollow" ymailto="mailto:` + user.email + `" target="_blank" href="mailto:` + user.email + `">` + user.email + `</a>` + ` is your email address and get started<br>
 								with Linkabee.</p><br><br><br>
 						  <p style="font-family:Helvetica, Arial, sans-serif;font-size:12px;margin-bottom:10px;">
 						  Having trouble with the links in this email? Copy and paste this link into your browser to verify: <br>
@@ -29,7 +29,6 @@ exports.sendVerificationMessage = function(user) {
 	    path: '/v3/mail/send',
 	    body: mail.toJSON(),
 	  });
-
 	  sendgrid.API(request, function(error, response) {
 	    if(error)
 	      return reject({
@@ -57,7 +56,7 @@ exports.sendWelcomeMessage = function(user) {
 						<center>
 							<h1 style="color:#5091bd;font-size:24px;text-align:center;">Welcome to Linkabee</h1><br>
 							<p style="font-family:Helvetica, Arial, sans-serif;font-size:16px;text-align:center;" >
-								Hey` + user.full_name + `, thanks for joining Linkabee - you'll find your account<br> 
+								Hey ` + user.full_name + `, thanks for joining Linkabee - you'll find your account<br> 
 								information below.<br> 
 								We're sure you'll love using Linkabee. <br>
 							</p>

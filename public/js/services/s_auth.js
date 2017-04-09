@@ -1,6 +1,7 @@
 angular.module('MetronicApp')
 .factory('s_auth', ['$http', '$window', function($http, $window){
 	var service = {
+			username: "",
 			email: "",
 			twitter_id: ""
 	};
@@ -47,6 +48,8 @@ angular.module('MetronicApp')
 	service.register = function(user){
 	  return $http.post('/api/v1/register', {user: user, twitter_id: service.twitter_id}).success(function(data){
 	    service.setToken(data.token);
+	    service.setUsername(user.username);
+	    service.setEmail(user.email);
 	  });			
 	};	
 
@@ -100,5 +103,18 @@ angular.module('MetronicApp')
 		return service.twitter_id;
 	}	
 
+	service.setUsername = function(username) {
+		service.username = username;
+	}
+
+	service.getUsername = function() {
+		return service.username;
+	}
+
+	service.sendConfirmationEmail = function() {
+		return $http.post("/api/v1/send_confirmation_email/"+service.email).success(function(res){
+			return res;
+		})
+	}
 	return service;
 }])

@@ -54,4 +54,8 @@ UserSchema.methods.generateJWT = function() {
 		exp: parseInt(exp.getTime() / 1000),
 	}, 'SECRET');
 }
+
+UserSchema.methods.isActivated = function() {
+	return this.activated;
+}
 mongoose.model('User', UserSchema);

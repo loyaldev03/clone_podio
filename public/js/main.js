@@ -8,7 +8,8 @@ var MetronicApp = angular.module("MetronicApp", [
     "ui.bootstrap", 
     "oc.lazyLoad",  
     "ngSanitize",
-    "satellizer"
+    "satellizer",
+    "angularFileUpload"
 ]); 
 
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
@@ -204,23 +205,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                 }
             }],
             resolve: {
-                deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'MetronicApp',
-                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
-                        files: [
-                            'assets/global/plugins/highcharts/js/highcharts-more.js',
-                            'assets/global/plugins/highcharts/js/modules/solid-gauge.js',
-
-                            'assets/global/plugins/morris/morris.css',                            
-                            'assets/global/plugins/morris/morris.min.js',
-                            'assets/global/plugins/morris/raphael-min.js',                            
-                            'assets/global/plugins/jquery.sparkline.min.js',
-                            'js/scripts/dashboard.js',
-                            'js/controllers/AuthController.js',
-                        ] 
-                    });
-                }],
             }
         })
         .state('register', {
@@ -233,23 +217,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                 }
             }],
             resolve: {
-                deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'MetronicApp',
-                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
-                        files: [
-                            'assets/global/plugins/highcharts/js/highcharts-more.js',
-                            'assets/global/plugins/highcharts/js/modules/solid-gauge.js',
-
-                            'assets/global/plugins/morris/morris.css',                            
-                            'assets/global/plugins/morris/morris.min.js',
-                            'assets/global/plugins/morris/raphael-min.js',                            
-                            'assets/global/plugins/jquery.sparkline.min.js',
-                            'js/scripts/dashboard.js',
-                            'js/controllers/AuthController.js',
-                        ] 
-                    });
-                }],
             }          
         })
         .state('activate', {
@@ -263,6 +230,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         })
         .state('register_with_social', {
             url: '/register_with_social/:email',
+            // templateUrl: "views/authenticate/register_with_social.html",
             controller: "AuthController",
             onEnter: ['$stateParams', 's_auth', '$state', function($stateParams, s_auth, $state){
                 s_auth.setEmail($stateParams.email);
@@ -295,6 +263,15 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                 }
             }]
         })
+        .state('verify', {
+            url: "/verify",
+            templateUrl: "views/authenticate/verify.html",
+            controller: "AuthController",
+            onEnter: [ function(){
+                var a = 1;
+                a=2;
+            }]
+        })
         .state('organization', {
             url: '/organization',
             templateUrl: "views/authenticate/organization.html",
@@ -325,7 +302,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                             'assets/global/plugins/morris/raphael-min.js',                            
                             'assets/global/plugins/jquery.sparkline.min.js',
                             'js/scripts/dashboard.js',
-                            'js/controllers/DashboardController.js'
+                            'js/controllers/AuthController.js',                            
                         ] 
                     });
                 }],
@@ -418,8 +395,30 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             url: "/workspace/:workspace_id/properties/new",
             templateUrl: "views/properties/new.html",
             data: {pageTitle: 'New Property'},
-            controller: "PropertyController",
+            controller: "PropertyController",            
             resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+                        files: [
+                            'assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css',
+                            'assets/global/plugins/select2/css/select2.min.css',
+                            'assets/global/plugins/select2/css/select2-bootstrap.min.css',
+
+                            'assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js',
+                            'assets/global/plugins/select2/js/select2.full.min.js',
+
+                            'assets/pages/scripts/components-bootstrap-select.min.js',
+                            'assets/pages/scripts/components-select2.min.js',
+
+                            'assets/global/plugins/angularjs/plugins/ui-select/select.min.css',
+                            'assets/global/plugins/angularjs/plugins/ui-select/select.min.js',                            
+
+                            'assets/global/plugins/angularjs/plugins/angular-file-upload/angular-file-upload.min.js',
+                        ] 
+                    }]);
+                }] 
             }
         })
         .state('properties_index', {
@@ -467,21 +466,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             data: {pageTitle: 'Landing Page'},
             controller: "LandingPageController",
             resolve: {
-                deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'MetronicApp',
-                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
-                        files: [
-                            'assets/global/plugins/morris/morris.css',                            
-                            'assets/global/plugins/morris/morris.min.js',
-                            'assets/global/plugins/morris/raphael-min.js',                            
-                            'assets/global/plugins/jquery.sparkline.min.js',
-
-                            'assets/pages/scripts/dashboard.min.js',
-                            'js/controllers/LandingPageController.js',
-                        ] 
-                    });
-                }]                
             }
         })
         // Blank Page

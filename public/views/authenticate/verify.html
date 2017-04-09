@@ -3,15 +3,9 @@
 <link href="../assets/pages/css/login.min.css" rel="stylesheet" type="text/css" />
 <div class="login">
   <div class="content">
-    <form class="">
-      <h3>Please verify your email address to keep your account secure.</h3>
-      <p>
-        We've sent your confirmation email to {{getEmail()}}. <br><br>
-        If you haven't received the email, check your junk/spam folder or <a href="javascript:;" ng-click="sendConfirmationEmail()">send the confirmation email</a> again. <br>
-        If it was sent to the wrong address, click back in your browser and enter a different one. <br><br>
-        Already have an account? <a href="/#/login">Log in here</a> <br><br>
-        Questions? Ask <a>LinkaBee Support</a>
-      </p>      
+    <form class="" method="post" ng-submit="gotoLogin()">
+      <h3>Verification email was sent.</h3>      
+      <button type="submit" id="register-submit-btn" class="btn btn-success uppercase pull-right">Log In</button>
     </form>
   </div>
   <script src="../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script> 
