@@ -65,7 +65,7 @@ angular.module('MetronicApp').controller('PropertyController', [
       $state.go('properties_edit', {workspace_id: $stateParams.workspace_id, property_id: property_id});
     }    
 
-    $scope.property.files = [];
+    $scope.property.files = {};
     $scope.remove_file = function(item) {
       delete $scope.property.files[item.file.name];
     }

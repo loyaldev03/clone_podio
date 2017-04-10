@@ -32,8 +32,8 @@ router.get('/property/:id', auth, function(req, res, next) {
 });
 router.post('/properties', auth, function(req, res, next) {
   var property = new Property(req.body);
-  debugger;
   property.save(function(err, property) {
+    debugger;
     if (err) { return next(err); }
     Workspace.update({_id: property.workspace}, {$addToSet: {properties: property._id}}, function(err, workspace) {
       if (err) { return next(err); }
@@ -72,19 +72,6 @@ router.post('/property/file_upload_for_property', function(req, res, next) {
       var extension = file.path.substring(file.path.lastIndexOf('.'));
 
       var s3 = new AWS.S3();
-
-      // s3.putObject({
-      //   Bucket: 'linkabee',
-      //   Key: "properties/" + uuid.v4() + extension,
-      //   Body: base64data,
-      //   ACL: 'public-read'
-      // },function (err, resp) {
-      //   if (err) {
-      //     return next(err);
-      //   }
-      //   debugger;
-      //   return res.json(resp);
-      // });
       s3.upload({
         Bucket: "linkabee",
         Key: "properties/" + uuid.v4() + extension,
@@ -94,7 +81,6 @@ router.post('/property/file_upload_for_property', function(req, res, next) {
         if (err) {
           return next(err);
         }
-        debugger;
         return res.json(data);
       });
     });
