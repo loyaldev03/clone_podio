@@ -55,7 +55,8 @@ MetronicApp.controller('AppController', [
     '$scope', 
     '$rootScope', 
     's_auth', 
-    function($scope, $rootScope, s_auth) {
+    '$timeout',
+    function($scope, $rootScope, s_auth, $timeout) {
         $scope.$on('$viewContentLoaded', function() {
             //App.initComponents(); // init core components
             // Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive 
@@ -68,6 +69,15 @@ MetronicApp.controller('AppController', [
         }
         $scope.isOrganized = function(){
             return s_auth.isOrganized();
+        }
+        $scope.loadingStatus = 0;
+        var countUp = function() {
+            $scope.loadingStatus+= 1;
+            $timeout(countUp, 1000);
+        }
+        $timeout(countUp, 1000);
+        $scope.isLoading = function() {
+            return ($scope.loadingStatus < 1)
         }
 }]);
 
