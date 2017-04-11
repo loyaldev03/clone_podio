@@ -111,10 +111,29 @@ angular.module('MetronicApp')
 		return service.username;
 	}
 
-	service.sendConfirmationEmail = function() {
-		return $http.post("/api/v1/send_confirmation_email/"+service.email).success(function(res){
+	service.sendConfirmationEmail = function(email=null) {
+		if (!email) {
+			return $http.post("/api/v1/send_confirmation_email/"+service.email).success(function(res){
+				return res;
+			})			
+		}
+		else {
+			return $http.post("/api/v1/send_confirmation_email/"+email).success(function(res){
+				return res;
+			})						
+		}
+	}
+
+	service.sendPasswordResetReqeust = function(email) {
+		return $http.post("/api/v1/send_password_reset_request_email/", {email: email}).success(function(res){
 			return res;
-		})
+		});
+	}
+
+	service.passwordReset = function(email, token, password) {
+		return $http.post("/api/v1/password_reset", {email: email, token: token, password: password}).success(function(res){
+			return res;
+		});
 	}
 	return service;
 }])

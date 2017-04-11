@@ -21,7 +21,7 @@ router.get('/sendActivationEmail/:username', function(req, res, next){
 
 		MailSender.sendVerificationMessage(user).then(function(_res){
     	debugger;
-    	res.redirect("/#/verify/");
+    	return res.redirect("/#/verify/");
 		});
 	})
 })

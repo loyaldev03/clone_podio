@@ -228,6 +228,11 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                 })
             }]
         })
+        .state('resetpassword', {
+            url: "/resetpassword/:email/:token",
+            templateUrl: 'views/authenticate/reset_password.html',
+            controller: "AuthController"
+        })
         .state('register_with_social', {
             url: '/register_with_social/:email',
             // templateUrl: "views/authenticate/register_with_social.html",
@@ -271,6 +276,19 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                 var a = 1;
                 a=2;
             }]
+        })
+        .state('send_activation_email', {
+            url: '/sendactivationemail/:email',
+            templateUrl: "views/authenticate/verify.html",
+            controller: "AuthController",
+            onEnter: ['$stateParams', 's_auth', function($stateParams, s_auth){
+                s_auth.sendConfirmationEmail($stateParams.email);
+            }]
+        })
+        .state('forgot_password', {
+            url: '/forgot_password',
+            templateUrl: 'views/authenticate/forgot_password.html',
+            controller: 'AuthController'
         })
         .state('organization', {
             url: '/organization',

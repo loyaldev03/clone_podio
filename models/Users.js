@@ -10,6 +10,7 @@ var UserSchema = new mongoose.Schema({
 	hash: String,
 	salt: String,
 	verification_token: String, 
+	password_reset_token: String,
 	activated: {
 		type: Boolean,
 		default: false

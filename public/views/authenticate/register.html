@@ -12,7 +12,7 @@
   <div class="content">
     <form class="" method="post" ng-submit="register()">
         <h3 class="font-green">Sign Up</h3>
-        <span id="error" class="help-block">{{error}}</span>
+        <span id="error" class="help-block" ng-bind-html="error"></span>
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">Full Name</label>
             <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Full Name" ng-model="user.full_name" /> </div>

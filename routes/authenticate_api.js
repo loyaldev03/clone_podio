@@ -31,8 +31,11 @@
 			user.setPassword(register_user.password);
 			user.verification_token =  uid(32);
 			if (_user) {
-				if (_user.hash) {
-					return res.status(401).json({message: 'The email is already registered with us'});	 
+				if (!_user.activated) {
+					return res.status(401).json({message: 'email is not verified'});	 
+				}
+				else if (_user.hash) {
+					return res.status(401).json({message: 'The email is already registered with us'});
 				}
 				else {
 					user._id = _user._id;
@@ -158,8 +161,45 @@ router.post('/send_confirmation_email/:email', function(req, res, next){
 		if (err) {
 			return next(err);
 		}
+
 		MailSender.sendVerificationMessage(user).then(function(_res){
+			debugger;
     	res.redirect("/#/verify/");
 		});
+	})
+})
+
+router.post('/send_password_reset_request_email', function(req, res, next)
+{
+	debugger;
+	MailSender.sendPasswordResetRequestMessage(req.body.email).then(function(err, _res) {
+		if (err) {
+			return next(err);
+		}
+		return res(_res);
+	});
+})
+
+router.post('/password_reset', function(req, res, next) {
+	var email = req.body.email;
+	var token = req.body.token;
+	var password = req.body.password;
+	User.findOne({email: email}, function(err, user) {
+		if (err) {
+			return next(err);
+		}
+		if (!user) {
+			return res.status(401).json({message: "No User"});
+		}
+		if (user.password_reset_token != token) {
+			return res.status(401).json({message: "Token doesn't match"});
+		}
+		user.setPassword(password);
+		user.save(function(err, _res){
+			if (err) {
+				return next(err);
+			}
+			return res.json(_res);
+		})
 	})
 })

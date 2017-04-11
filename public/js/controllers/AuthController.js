@@ -16,7 +16,12 @@ function($scope, $state, s_auth, $location, $stateParams, $auth){
   $scope.register = function(){
     $scope.submitted = true;
     s_auth.register($scope.user).error(function(error){
-      $scope.error = error.message;
+      if (error.message == 'email is not verified') {
+        $scope.error = 'This user already exists, but has not been verified yet. <a href="#/sendactivationemail/' + $scope.user.email + '">Resend verification mail?</a>'
+      }
+      else {
+        $scope.error = error.message;
+      }
     }).then(function(){
       $state.go( "verify_account" );
     });
@@ -92,4 +97,27 @@ function($scope, $state, s_auth, $location, $stateParams, $auth){
   $scope.user = {};
   //for profile registration page with social login
   $scope.user.email = s_auth.getEmail();
+
+  //password reset logic
+  $scope.notification_for_password_reset_request = "";
+  $scope.error_for_password_reset = "";
+  $scope.sendPasswordResetRequest = function() {
+    $scope.notification_for_password_reset_request = "Further instructions have been sent to your email.";
+    s_auth.sendPasswordResetReqeust($scope.email_for_password_reset);
+    $scope.email_for_password_reset = "";
+  }
+
+  $scope.resetPassword = function() {
+    if (!$scope.new_password || !$scope.confirm_password) {
+      $scope.error_for_password_reset = "Please fill in all fields";
+    }
+    else if ($scope.new_password != $scope.confirm_password) {
+      $scope.error_for_password_reset = "New Password and Confirm Password must be same!";
+    }
+    else {
+      s_auth.passwordReset($stateParams.email, $stateParams.token, $scope.new_password).then(function(res){
+          $state.go('login');
+      });      
+    }
+  }
 }])
