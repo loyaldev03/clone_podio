@@ -11,6 +11,7 @@ angular.module('MetronicApp')
 		$window.localStorage['current-user-token'] = token;
 		var payload = JSON.parse($window.atob(token.split('.')[1]));
 		service.setCurrentEmail(payload.email);
+		service.setUsername(payload.username);
 	}
 
 	service.getToken = function() {
