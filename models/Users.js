@@ -52,6 +52,7 @@ UserSchema.methods.generateJWT = function() {
 		username: this.username,
 		activated: this.activated,
 		organization: this.organization,
+		email: this.email,
 		exp: parseInt(exp.getTime() / 1000),
 	}, 'SECRET');
 }
