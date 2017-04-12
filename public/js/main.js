@@ -279,8 +279,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             templateUrl: "views/authenticate/verify.html",
             controller: "AuthController",
             onEnter: [ function(){
-                var a = 1;
-                a=2;
             }]
         })
         .state('send_activation_email', {
