@@ -83,7 +83,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <div ui-view class="fade-in-up" ng-if="!isLoggedIn()"> </div>
         </div>
         <div style="position: fixed; width: 100%; height: 100%;left: 0px; top: 0px;z-index: 99999; background-color: #364150;display: table; display: flex;" id="loading-mark">
-            <img src="assets/apps/img/pageloader.gif" alt="" style="display: table-cell; vertical-align: middle; width: 100px; height: 100px;    margin: auto;"/>
+            <img src="assets/apps/img/pageloader.gif" alt="" style="vertical-align: middle; width: 100px; height: 100px;    margin: auto;"/>
         </div>
         <!-- END QUICK NAV -->
         <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
@@ -144,7 +144,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <script type="text/javascript">
             window.setTimeout(function(){ 
                 $('#loading-mark').css('display', 'none');
-            }, 2000);;
+            }, 1000);;
         </script>
         <!-- END APP LEVEL JQUERY SCRIPTS -->
         <!-- END JAVASCRIPTS -->
