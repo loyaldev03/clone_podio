@@ -70,15 +70,11 @@ MetronicApp.controller('AppController', [
         $scope.isOrganized = function(){
             return s_auth.isOrganized();
         }
-        $scope.loadingStatus = 0;
+        $rootScope.isLoading = true;
         var countUp = function() {
-            $scope.loadingStatus+= 1;
-            $timeout(countUp, 1000);
+            $rootScope.isLoading = false;
         }
         $timeout(countUp, 1000);
-        $scope.isLoading = function() {
-            return ($scope.loadingStatus < 1)
-        }
 }]);
 
 /***

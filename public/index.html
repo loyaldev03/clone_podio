@@ -61,7 +61,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- DOC: Apply "page-full-width" class to the body element to have full width page without the sidebar menu -->
 
     <body ng-controller="AppController" class="page-header-fixed page-sidebar-closed-hide-logo" ng-class="{'page-content-white': settings.layout.pageContentWhite,'page-container-bg-solid': settings.layout.pageBodySolid, 'page-sidebar-closed': settings.layout.pageSidebarClosed}">
-        <div ng-if="!isLoading()">
+        <div class="main-container">
             <div ng-if="isLoggedIn()">
                 <div data-ng-include="'tpl/header.html'" data-ng-controller="HeaderController" class="page-header navbar navbar-fixed-top"> </div>
                 <div class="clearfix"> </div>
@@ -82,8 +82,8 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
             <div ui-view class="fade-in-up" ng-if="!isLoggedIn()"> </div>
         </div>
-        <div ng-if="isLoading()">
-            This is loading Status.
+        <div style="position: fixed; width: 100%; height: 100%;left: 0px; top: 0px;z-index: 99999; background-color: #364150;display: table; display: flex;" id="loading-mark">
+            <img src="assets/apps/img/pageloader.gif" alt="" style="display: table-cell; vertical-align: middle; width: 100px; height: 100px;    margin: auto;"/>
         </div>
         <!-- END QUICK NAV -->
         <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
@@ -141,6 +141,11 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="../js/services/s_item.js"></script>
         <script src="../js/services/s_property.js"></script>
 
+        <script type="text/javascript">
+            window.setTimeout(function(){ 
+                $('#loading-mark').css('display', 'none');
+            }, 2000);;
+        </script>
         <!-- END APP LEVEL JQUERY SCRIPTS -->
         <!-- END JAVASCRIPTS -->
     </body>
