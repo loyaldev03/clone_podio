@@ -67,6 +67,7 @@ function($scope, $state, s_auth, $location, $stateParams, $auth){
   }
 
   $scope.createAccount = function() {
+    s_auth.setEmail("");
     $state.go('register');
   }
   
