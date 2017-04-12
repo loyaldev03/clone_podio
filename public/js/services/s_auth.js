@@ -3,7 +3,8 @@ angular.module('MetronicApp')
 	var service = {
 			username: "",
 			email: "",
-			twitter_id: ""
+			twitter_id: "",
+			current_email: ""
 	};
 
 	service.setToken = function (token) {
@@ -49,7 +50,8 @@ angular.module('MetronicApp')
 	  return $http.post('/api/v1/register', {user: user, twitter_id: service.twitter_id}).success(function(data){
 	    service.setToken(data.token);
 	    service.setUsername(user.username);
-	    service.setEmail(user.email);
+	    service.setCurrentEmail(user.email);
+			service.setEmail("");
 	  });			
 	};	
 
@@ -95,6 +97,13 @@ angular.module('MetronicApp')
 		return service.email;
 	}	
 
+	service.setCurrentEmail = function(email) {
+		service.current_email = email;
+	}
+
+	service.getCurrentEmail = function() {
+		service.current_email;
+	}
 	service.setTwitterID = function(id) {
 		service.twitter_id = id;
 	}
