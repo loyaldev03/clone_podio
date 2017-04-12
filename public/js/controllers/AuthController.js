@@ -35,6 +35,7 @@ function($scope, $state, s_auth, $location, $stateParams, $auth){
     })
   }
   
+  $scope.register_email = s_auth.getEmail();
   $scope.logIn = function(){
     $scope.login_submitted = true;
     s_auth.logIn($scope.user).error(function(error){
