@@ -102,7 +102,7 @@ angular.module('MetronicApp')
 	}
 
 	service.getCurrentEmail = function() {
-		service.current_email;
+		return service.current_email;
 	}
 	service.setTwitterID = function(id) {
 		service.twitter_id = id;

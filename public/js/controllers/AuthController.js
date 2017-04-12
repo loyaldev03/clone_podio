@@ -127,4 +127,9 @@ function($scope, $state, s_auth, $location, $stateParams, $auth){
       });      
     }
   }
+
+  //current email for process after registration
+  $scope.getCurrentEmail = function() {
+    return s_auth.getCurrentEmail();
+  } 
 }])
