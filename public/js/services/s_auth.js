@@ -135,8 +135,10 @@ angular.module('MetronicApp')
 
 	service.sendPasswordResetReqeust = function(email) {
 		return $http.post("/api/v1/send_password_reset_request_email/", {email: email}).success(function(res){
-			return res;
-		});
+			return res;			
+		}).error(function(err){
+			return err;
+		})
 	}
 
 	service.passwordReset = function(email, token, password) {

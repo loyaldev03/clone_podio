@@ -170,13 +170,20 @@ router.post('/send_confirmation_email/:username', function(req, res, next){
 
 router.post('/send_password_reset_request_email', function(req, res, next)
 {
-	debugger;
-	MailSender.sendPasswordResetRequestMessage(req.body.email).then(function(err, _res) {
+	User.findOne({email: req.body.email}, function(err, user) {
 		if (err) {
 			return next(err);
 		}
-		return res(_res);
-	});
+		if (!user || !user.hash) {
+			return res.status(404).json({message: "not found"});
+		}
+		MailSender.sendPasswordResetRequestMessage(req.body.email).then(function(err, _res) {
+			if (err) {
+				return next(err);
+			}
+			return res(_res);
+		});
+	})
 })
 
 router.post('/password_reset', function(req, res, next) {

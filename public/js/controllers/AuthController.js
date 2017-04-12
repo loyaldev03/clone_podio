@@ -104,8 +104,13 @@ function($scope, $state, s_auth, $location, $stateParams, $auth){
   $scope.notification_for_password_reset_request = "";
   $scope.error_for_password_reset = "";
   $scope.sendPasswordResetRequest = function() {
-    $scope.notification_for_password_reset_request = "Further instructions have been sent to your email.";
-    s_auth.sendPasswordResetReqeust($scope.email_for_password_reset);
+    s_auth.sendPasswordResetReqeust($scope.email_for_password_reset)
+    .error(function(err){
+      $scope.notification_for_password_reset_request = "Sorry, we don't recognize that email address";  
+    })
+    .then(function(){
+      $scope.notification_for_password_reset_request = "Further instructions have been sent to your email.";
+    });
     $scope.email_for_password_reset = "";
   }
 
