@@ -156,15 +156,14 @@
 
 	module.exports = router;
 
-router.post('/send_confirmation_email/:email', function(req, res, next){
-	User.findOne({email: req.params.email}, function(err, user){
+router.post('/send_confirmation_email/:username', function(req, res, next){
+	User.findOne({username: req.params.username}, function(err, user){
 		if (err) {
 			return next(err);
 		}
 
 		MailSender.sendVerificationMessage(user).then(function(_res){
-			debugger;
-    	res.redirect("/#/verify/");
+			return res.json(_res);
 		});
 	})
 })

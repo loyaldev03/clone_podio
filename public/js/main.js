@@ -284,11 +284,11 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             }]
         })
         .state('send_activation_email', {
-            url: '/sendactivationemail/:email',
+            url: '/sendactivationemail/:username',
             templateUrl: "views/authenticate/verify.html",
             controller: "AuthController",
             onEnter: ['$stateParams', 's_auth', function($stateParams, s_auth){
-                s_auth.sendConfirmationEmail($stateParams.email);
+                s_auth.sendConfirmationEmail($stateParams.username);
             }]
         })
         .state('forgot_password', {

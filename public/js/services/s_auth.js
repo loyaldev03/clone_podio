@@ -111,14 +111,14 @@ angular.module('MetronicApp')
 		return service.username;
 	}
 
-	service.sendConfirmationEmail = function(email=null) {
-		if (!email) {
-			return $http.post("/api/v1/send_confirmation_email/"+service.email).success(function(res){
+	service.sendConfirmationEmail = function(username=null) {
+		if (!username) {
+			return $http.post("/api/v1/send_confirmation_email/"+service.username).success(function(res){
 				return res;
 			})			
 		}
 		else {
-			return $http.post("/api/v1/send_confirmation_email/"+email).success(function(res){
+			return $http.post("/api/v1/send_confirmation_email/"+username).success(function(res){
 				return res;
 			})						
 		}

@@ -17,7 +17,7 @@ function($scope, $state, s_auth, $location, $stateParams, $auth){
     $scope.submitted = true;
     s_auth.register($scope.user).error(function(error){
       if (error.message == 'email is not verified') {
-        $scope.error = 'This user already exists, but has not been verified yet. <a href="#/sendactivationemail/' + $scope.user.email + '">Resend verification mail?</a>'
+        $scope.error = 'This user already exists, but has not been verified yet. <a href="#/sendactivationemail/' + $scope.user.username + '">Resend verification mail?</a>'
       }
       else {
         $scope.error = error.message;
@@ -45,7 +45,7 @@ function($scope, $state, s_auth, $location, $stateParams, $auth){
         $scope.error_for_login = "Invalid password. Please try again.";
       }
       else if (error.message == "not verified yet") {
-        $scope.error_for_login = "Sorry, your account was never verified. <a href='/#/register'>Sign up</a> for a new one or click here to receive a <a href='/sendActivationEmail/" + $scope.user.username + "' ng-click='gotoLogin()'>new confirmation link</a>.";
+        $scope.error_for_login = "Sorry, your account was never verified. <a href='/#/register'>Sign up</a> for a new one or click here to receive a <a href='#/sendactivationemail/" + $scope.user.username + "'>new confirmation link</a>.";
       }
       else if (error.message == "empty fields") {
         $scope.error_for_login = "The username and password fields are required";
