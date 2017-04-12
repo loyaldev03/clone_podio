@@ -31,7 +31,7 @@
 			user.setPassword(register_user.password);
 			user.verification_token =  uid(32);
 			if (_user) {
-				if (!_user.activated) {
+				if (_user.hash && !_user.activated) {
 					return res.status(401).json({message: 'email is not verified'});	 
 				}
 				else if (_user.hash) {
