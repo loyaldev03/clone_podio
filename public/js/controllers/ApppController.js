@@ -178,3 +178,22 @@ angular.module('MetronicApp').controller('SelectApppModalController', [
     }
 }]);
 
+angular.module('MetronicApp').controller('SelectApppModalController', [
+		'$scope', 
+		'$uibModalInstance', 
+		's_appp', 
+		's_auth', 
+		'$state', 
+		'$location',
+		's_workspace',
+		function($scope, $uibModalInstance, s_appp, s_auth, $state, $location, s_workspace) {
+    $scope.newApp = function() {
+		  $uibModalInstance.close();
+    	$state.go('appps_new', {workspace_id: s_workspace.current_workspace._id})
+    }
+
+    $scope.addAppFromMarket = function() {
+    	console.log("----------------add app------------------------");
+    }
+}]);
+
