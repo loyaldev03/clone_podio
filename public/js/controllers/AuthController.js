@@ -70,6 +70,19 @@ function($scope, $state, s_auth, $location, $stateParams, $auth){
         //   toastr.error(error);
         // }
       });    
+      .catch(function(error) {
+        console.log("---------------------error--------------------", error);
+        // if (error.message) {
+        //   // Satellizer promise reject error.
+        //   toastr.error(error.message);
+        // } else if (error.data) {
+        //   // HTTP response error from server
+        //   toastr.error(error.data.message, error.status);
+        // } else {
+        //   toastr.error(error);
+        // }
+      });    
+
   };
 
   $scope.createAccount = function() {
