@@ -51,6 +51,13 @@ angular.module('MetronicApp').controller('ApppController', [
     $scope.addItem = function() {
     	$state.go('items_new', {workspace_id: $stateParams.workspace_id, appp_id: $stateParams.appp_id});
     }
+    $scope.updateAppp = function() {
+    	$state.go('appps_show', {workspace_id: $stateParams.workspace_id, appp_id: $stateParams.appp_id});
+    }
+
+    $scope.addItem = function() {
+    	$state.go('items_new', {workspace_id: $stateParams.workspace_id, appp_id: $stateParams.appp_id});
+    }    
 }]);
 
 angular.module('MetronicApp').controller('ApppModalDialogHelperController', [
