@@ -32,6 +32,22 @@ function($scope, $state, s_auth, $location, $stateParams, $auth){
     })
   }
 
+  $scope.logIn = function(){
+    s_auth.logIn($scope.user).error(function(error){
+      $scope.error = error;
+    }).then(function(){
+      $state.go( "dashboard" );
+    });
+  };
+
+  $scope.logOut = function() {
+    s_auth.logOut($scope.user).error(function(error){
+      $scope.error = error;
+    }).then(function() {
+      $state.go( "login" );
+    })
+  }  
+
   $scope.createAccount = function() {
     $state.go('register');
   }
