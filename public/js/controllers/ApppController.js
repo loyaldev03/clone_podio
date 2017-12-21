@@ -32,6 +32,16 @@ angular.module('MetronicApp').controller('ApppController', [
       .then(function(res){
       	$state.go('appps_edit', {workspace_id: $stateParams.workspace_id, appp_id: res.data._id});
       });
+      s_appp.create({
+      	name: $scope.appp.name, 
+      	item_name: $scope.appp.item_name,
+      	type: $scope.appp.type,
+      	app_icon: $scope.appp.app_icon,
+      	workspace: $stateParams.workspace_id
+      })
+      .then(function(res){
+      	$state.go('appps_edit', {workspace_id: $stateParams.workspace_id, appp_id: res.data._id});
+      });	    
     }
 
     $scope.updateAppp = function() {
