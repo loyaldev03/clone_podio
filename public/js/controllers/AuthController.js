@@ -5,6 +5,12 @@ angular.module('MetronicApp').controller('AuthController', [
 '$location',
 '$stateParams',
 '$auth',
+'$scope',
+'$state',
+'s_auth',
+'$location',
+'$stateParams',
+'$auth',
 function($scope, $state, s_auth, $location, $stateParams, $auth){
   $scope.user = {};
 
