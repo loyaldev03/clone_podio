@@ -107,6 +107,35 @@ angular.module('MetronicApp').controller('ApppModalDialogHelperController', [
 		$scope.goto = function(appp) {
 	      $state.go('appps_detail', {id: appp._id});
 		}
+    // All Appps
+    // Modal Dialog for creating appp
+		$scope.animationsEnabled = true;
+		$scope.addAppp = function(opt_attributes)
+		{
+		    var out = $uibModal.open(
+		    {
+		        animation: $scope.animationsEnabled,
+		        templateUrl: "views/appps/select_appp.html",
+		        controller: "SelectApppModalController",
+		        size: opt_attributes,
+		        resolve: {
+		        }
+		    });
+		    out.result.then(function(value)
+		    {
+		        $scope.selected = value;
+		    }, function()
+		    {
+		        $log.info("Modal dismissed at: " + new Date);
+		    });
+		};
+		$scope.toggleAnimation = function()
+		{
+		    $scope.animationsEnabled = !$scope.animationsEnabled;
+		};
+		$scope.goto = function(appp) {
+	      $state.go('appps_detail', {id: appp._id});
+		}		
 }]);
 
 
