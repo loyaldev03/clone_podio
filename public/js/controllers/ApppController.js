@@ -92,6 +92,56 @@ angular.module('MetronicApp').controller('ApppModalDialogHelperController', [
 		}
 }]);
 
+
+angular.module('MetronicApp').controller('ApppModalDialogHelperController', [
+	'$rootScope', 
+	'$scope', 
+	'settings', 
+	'$uibModal', 
+	'$log', 
+	's_appp',
+	'$state',
+	function($rootScope, $scope, settings, $uibModal, $log, s_appp, $state) {
+    $scope.$on('$viewContentLoaded', function() {   
+        // initialize core components
+        App.initAjax();
+        // set default layout mode
+        $rootScope.settings.layout.pageContentWhite = true;
+        $rootScope.settings.layout.pageBodySolid = false;
+        $rootScope.settings.layout.pageSidebarClosed = false;
+    });
+
+    // All Appps
+    // Modal Dialog for creating appp
+		$scope.animationsEnabled = true;
+		$scope.addAppp = function(opt_attributes)
+		{
+		    var out = $uibModal.open(
+		    {
+		        animation: $scope.animationsEnabled,
+		        templateUrl: "views/appps/select_appp.html",
+		        controller: "SelectApppModalController",
+		        size: opt_attributes,
+		        resolve: {
+		        }
+		    });
+		    out.result.then(function(value)
+		    {
+		        $scope.selected = value;
+		    }, function()
+		    {
+		        $log.info("Modal dismissed at: " + new Date);
+		    });
+		};
+		$scope.toggleAnimation = function()
+		{
+		    $scope.animationsEnabled = !$scope.animationsEnabled;
+		};
+		$scope.goto = function(appp) {
+	      $state.go('appps_detail', {id: appp._id});
+		}
+}]);
+
 angular.module('MetronicApp').controller('SelectApppModalController', [
 		'$scope', 
 		'$uibModalInstance', 
@@ -110,3 +160,4 @@ angular.module('MetronicApp').controller('SelectApppModalController', [
     	console.log("----------------add app------------------------");
     }
 }]);
+
