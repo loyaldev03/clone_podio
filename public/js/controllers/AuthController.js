@@ -98,6 +98,13 @@ function($scope, $state, s_auth, $location, $stateParams, $auth){
     });
   };
 
+  $scope.register = function(){
+    s_auth.register($scope.user).error(function(error){
+      $scope.error = error;
+    }).then(function(){
+      $state.go( "dashboard" );
+    });
+  };
   $scope.logIn = function(){
     s_auth.logIn($scope.user).error(function(error){
       $scope.error = error;
