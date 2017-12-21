@@ -7,8 +7,6 @@ angular.module('MetronicApp').controller('AuthController', [
 '$auth',
 '$scope',
 '$state',
-'s_auth',
-'$location',
 '$stateParams',
 '$auth',
 function($scope, $state, s_auth, $location, $stateParams, $auth){
