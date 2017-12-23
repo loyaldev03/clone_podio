@@ -11,6 +11,12 @@ angular.module('MetronicApp').controller('DashboardController', function($rootSc
     $rootScope.settings.layout.pageSidebarClosed = false;
 
     $scope.number_of_deals = 100;
+
+    $rootScope.settings.layout.pageContentWhite = true;
+    $rootScope.settings.layout.pageBodySolid = false;
+    $rootScope.settings.layout.pageSidebarClosed = false;
+
+    $scope.number_of_deals = 100;    
     
     console.log("-----------------statistics-----------------------", statistics.statistics);
     $scope.acc_properties_stats = statistics.statistics.acc_properties_stats
