@@ -39,6 +39,7 @@ exports.createDefaultFields = function(appp){
 var createField = function(param, appp) {
   return new Promise(function(resolve, reject){
     param["appp"] = appp._id;
+    param["appp"] = appp._id;
     debugger;
     var field = new Field(param);
     field.save(function(err, field) {
