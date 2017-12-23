@@ -80,6 +80,45 @@ exports.getItemsForAppp = function(appp_id) {
 					return resolve(_items);
 				})		
 
+				Value.aggregate([
+					{
+						$lookup:
+						{
+							from: "fields",
+							localField: "field",
+							foreignField: "_id",
+							as: "resolved_field"
+						}
+					},
+					{	
+						$group: 
+						{
+							_id: "$item", 
+							fields: 
+							{
+								$addToSet: 
+								{
+									field: {
+										$arrayElemAt: ["$resolved_field", 0]
+									},
+									value: "$value"
+								}
+							}
+						}
+					}
+				]).exec(function(err, items){
+					if (err) {
+						return reject(err);
+					}
+					var _items = [];
+					items.forEach(function(item){
+						if (appp.items.indexOf(item._id) >= 0) {
+							_items.push(item);
+						}
+					})
+					return resolve(_items);
+				})		
+				
 			})
 		}
 		catch(err){
