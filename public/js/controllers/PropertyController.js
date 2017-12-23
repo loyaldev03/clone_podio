@@ -8,6 +8,14 @@ angular.module('MetronicApp').controller('PropertyController', [
 	's_property',
 	'$stateParams',
 	'$state',
+	'$rootScope', 
+	'$scope', 
+	'settings', 
+	'$uibModal', 
+	'$log', 
+	's_property',
+	'$stateParams',
+	'$state',	
 	function($rootScope, $scope, settings, $uibModal, $log, s_property, $stateParams, $state) {
     $scope.$on('$viewContentLoaded', function() {   
         // initialize core components
