@@ -42,6 +42,8 @@ var createField = function(param, appp) {
     param["appp"] = appp._id;
     debugger;
     var field = new Field(param);
+    var field = new Field(param);
+
     field.save(function(err, field) {
       debugger;
       if (err) { return reject(err); }
