@@ -8,6 +8,16 @@ var Item = mongoose.model('Item');
 var Field = mongoose.model('Field');  
 var Value = mongoose.model('Value');  
 
+var express = require('express');
+var router = express.Router();
+var mongoose = require('mongoose');
+var User = mongoose.model('User');  
+var Workspace = mongoose.model('Workspace');  
+var Appp = mongoose.model('Appp');  
+var Item = mongoose.model('Item');  
+var Field = mongoose.model('Field');  
+var Value = mongoose.model('Value');  
+
 var exports = module.exports; 
 
 exports.createDefaultFields = function(appp){
