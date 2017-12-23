@@ -1,4 +1,4 @@
-angular.module('MetronicApp').controller('DashboardController', function($rootScope, $scope, $http, $timeout, statistics) {
+angular.module('MetronicApp').controller('DashboardController', function($rootScope, $scope, $http, $timeout, statistics, $rootScope, $scope, $http, $timeout, statistics) {
     $scope.$on('$viewContentLoaded', function() {   
         // initialize core components
         App.initAjax();
