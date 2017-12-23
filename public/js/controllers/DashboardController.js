@@ -22,4 +22,15 @@ angular.module('MetronicApp').controller('DashboardController', function($rootSc
     $scope.work_in_progress = statistics.statistics.work_in_progress;
 
     $scope.properties_not_updated_in = statistics.statistics.properties_not_updated_in;
+    
+    console.log("-----------------statistics-----------------------", statistics.statistics);
+    $scope.acc_properties_stats = statistics.statistics.acc_properties_stats
+   
+    $scope.tasks_due_today = statistics.statistics.tasks_due_today;
+
+    $scope.tasks_past_due = statistics.statistics.tasks_past_due;
+
+    $scope.work_in_progress = statistics.statistics.work_in_progress;
+
+    $scope.properties_not_updated_in = statistics.statistics.properties_not_updated_in;    
 });
