@@ -41,6 +41,14 @@ angular.module('MetronicApp').controller('PropertyController', [
       });
     }
 
+    $scope.property = {};
+    $scope.createProperty = function() {
+      s_property.create($scope.property, $stateParams.workspace_id).then(function(res){
+          // $state.go('properties_show', {workspace_id: $stateParams.workspace_id});
+          $state.go('properties_index', {workspace_id: $stateParams.workspace_id});
+      });
+    }    
+
     //All Properties for workspace
     $scope.properties = s_property.properties;
     
