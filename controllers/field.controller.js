@@ -94,4 +94,19 @@ var createField = function(param, appp) {
       });
     })
   })
+
+    return new Promise(function(resolve, reject){
+    param["appp"] = appp._id;
+    debugger;
+    var field = new Field(param);
+    field.save(function(err, field) {
+      debugger;
+      if (err) { return reject(err); }
+      Appp.update({_id: appp._id}, {$addToSet: {fields: field._id}}, function(err, appp) {
+          if (err) {return reject(err);}
+          return resolve(field);
+      });
+    })
+  })
+
 }     
