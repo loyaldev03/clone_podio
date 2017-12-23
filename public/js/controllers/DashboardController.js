@@ -18,7 +18,7 @@ angular.module('MetronicApp').controller('DashboardController', function($rootSc
 
     $scope.number_of_deals = 100;
 
-    $rootScope.settings.layout.pageContentWhite = true;
+    $rootScope.settings.layout.pageContentWhite = false;
     $rootScope.settings.layout.pageBodySolid = false;
     $rootScope.settings.layout.pageSidebarClosed = false;
 
