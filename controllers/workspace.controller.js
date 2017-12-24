@@ -46,6 +46,17 @@ exports.createDefaultWorkspace = function(user){
         .catch(function(err) {
           return reject(err);
         });  
+      User.update({_id: workspace.user}, {$addToSet: {workspaces: workspace._id}, default_workspace: workspace._id}, function(err, user) {
+        if (err) {
+          return reject(err);
+        }
+        appp_controller.createDefaultAppp(workspace)
+        .then(function(appp) {
+          return resolve(workspace);
+        })
+        .catch(function(err) {
+          return reject(err);
+        });          
       });
     });
   });
