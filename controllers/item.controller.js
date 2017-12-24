@@ -168,7 +168,14 @@ exports.getItemsForAppp = function(appp_id) {
 							localField: "field",
 							foreignField: "_id",
 							as: "resolved_field"
-						}
+						},
+						$lookup:
+						{
+							from: "fields",
+							localField: "field",
+							foreignField: "_id",
+							as: "resolved_field"
+						}						
 					},
 					{	
 						$group: 
