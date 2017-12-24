@@ -117,6 +117,16 @@ exports.getItemsForAppp = function(appp_id) {
 						}
 					})
 					return resolve(_items);
+					if (err) {
+						return reject(err);
+					}
+					var _items = [];
+					items.forEach(function(item){
+						if (appp.items.indexOf(item._id) >= 0) {
+							_items.push(item);
+						}
+					})
+					return resolve(_items);
 				})		
 				
 			})
