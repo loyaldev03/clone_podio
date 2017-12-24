@@ -90,6 +90,16 @@ exports.createDefaultWorkspace = function(user){
     else {
       username = user.twitter.username;
     }
+    if (user.username) {
+      username = user.username;
+    }
+    else if (user.facebook) {
+      username = user.facebook.name;
+    }
+    else {
+      username = user.twitter.username;
+    }
+
     var workspace = new Workspace({
       title: username+"'s leads",
       description: "default workspace",
