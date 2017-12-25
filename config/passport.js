@@ -73,6 +73,10 @@ passport.use('facebook', new FacebookStrategy({
     clientID        : config.get('Facebook.appID'),
     clientSecret    : config.get('Facebook.appSecret'),
     callbackURL     : config.get('Facebook.callbackURL'),
+    profileFields: ['id', 'email', 'gender', 'link', 'locale', 'name', 'timezone', 'updated_time', 'verified'],
+    clientID        : config.get('Facebook.appID'),
+    clientSecret    : config.get('Facebook.appSecret'),
+    callbackURL     : config.get('Facebook.callbackURL'),
     profileFields: ['id', 'email', 'gender', 'link', 'locale', 'name', 'timezone', 'updated_time', 'verified']
 },
 	// facebook will send back the tokens and profile
