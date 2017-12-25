@@ -30,6 +30,14 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
+// used to deserialize the user
+passport.deserializeUser(function(id, done) {
+	debugger;
+  User.findById(id, function(err, user) {
+      done(err, user);
+  });
+});
+
 passport.use(new LocalStrategy(
 	function(username, password, done) {
 		User.findOne({ username: username }, function(err, user) {
