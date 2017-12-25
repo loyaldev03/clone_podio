@@ -66,6 +66,22 @@ angular.module('MetronicApp').controller('PropertyController', [
     $scope.addproperty = function() {
     	$state.go('properties_new', {workspace_id: $stateParams.workspace_id, property_id: $stateParams.property_id});
     }    
+
+        $scope.updateProperty = function() {
+    	$state.go('properties_show', {workspace_id: $stateParams.workspace_id, property_id: $stateParams.property_id});
+    }
+
+    $scope.addproperty = function() {
+    	$state.go('properties_new', {workspace_id: $stateParams.workspace_id, property_id: $stateParams.property_id});
+    }
+    $scope.updateProperty = function() {
+    	$state.go('properties_show', {workspace_id: $stateParams.workspace_id, property_id: $stateParams.property_id});
+    }
+
+    $scope.addproperty = function() {
+    	$state.go('properties_new', {workspace_id: $stateParams.workspace_id, property_id: $stateParams.property_id});
+    }    
+
 }]);
 
 /* Setup Property page controller */
