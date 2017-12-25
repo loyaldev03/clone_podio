@@ -180,12 +180,18 @@ angular.module('MetronicApp').controller('PropertyController', [
         $rootScope.settings.layout.pageSidebarClosed = false;
     });
    
-   	$scope.newProperty = function() {
-   		$state.go('properties_new', {workspace_id: $stateParams.workspace_id});
-   	}
+	$scope.newProperty = function() {
+		$state.go('properties_new', {workspace_id: $stateParams.workspace_id});
+	}
    	//Fields for property
     $scope.fields = s_property.fields;
 
+	$scope.newProperty = function() {
+		$state.go('properties_new', {workspace_id: $stateParams.workspace_id});
+	}
+   	//Fields for property
+    $scope.fields = s_property.fields;
+		
     $scope.property = {};
     $scope.createProperty = function() {
       s_property.create($scope.property, $stateParams.workspace_id).then(function(res){
