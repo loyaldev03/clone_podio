@@ -3,6 +3,9 @@ angular.module('MetronicApp')
 	'$http', 
 	'$window', 
 	's_auth', 
+	'$http', 
+	'$window', 
+	's_auth', 	
 	function($http, $window, s_auth){
 		var appp = {
 			all_appps: [],
