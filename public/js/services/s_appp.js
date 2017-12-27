@@ -106,6 +106,9 @@ angular.module('MetronicApp')
 		appp.getCurrentAppp = function() {
 			return appp.current_appp;
 		}
+		appp.getCurrentAppp = function() {
+			return appp.current_appp;
+		}		
 		// appp.getAllAppps = function() {
 		// 	return $http.get('/api/v1/appps', {
 		// 		headers: {s_authorization: 'Bearer ' + s_auth.getToken()}
