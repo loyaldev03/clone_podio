@@ -125,6 +125,11 @@ angular.module('MetronicApp')
 	    auth.saveToken(data.token);
 	  });
 	};	
+	auth.register = function(user){
+	  return $http.post('/api/v1/register', user).success(function(data){
+	    auth.saveToken(data.token);
+	  });
+	};		
 
 	auth.logIn = function(user){
 	  return $http.post('/api/v1/login', user).success(function(data){
