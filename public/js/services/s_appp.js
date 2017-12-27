@@ -94,7 +94,15 @@ angular.module('MetronicApp')
 					appp.current_appp = res.data;
 					return res.data;
 			})
-		}
+		
+		appp.setCurrentAppp = function(id) {
+			return $http.get('/api/v1/appp/'+id, {
+				headers: {Authorization: 'Bearer '+s_auth.getToken()}
+			}).then(function(res){
+					appp.current_appp = res.data;
+					return res.data;
+			})
+				}
 		appp.getCurrentAppp = function() {
 			return appp.current_appp;
 		}
