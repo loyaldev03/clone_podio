@@ -65,6 +65,14 @@ angular.module('MetronicApp')
 						return appp;
 			})
 			}
+		appp.create = function(appp) {
+			return $http.post('/api/v1/appps', appp, {
+				headers: {Authorization: 'Bearer '+s_auth.getToken()}
+			}).success(function(appp){
+						return appp;
+			})
+			}
+
 		appp.get = function(id) {
 			return $http.get('/api/v1/appp/'+id, {
 				headers: {Authorization: 'Bearer '+s_auth.getToken()}
