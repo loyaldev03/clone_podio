@@ -77,6 +77,10 @@ angular.module('MetronicApp')
 		return $window.localStorage['current-user-token'];
 	}
 
+	auth.getToken = function() {
+		return $window.localStorage['current-user-token'];
+	}
+
 	auth.isLoggedIn = function() {
 		var token = auth.getToken();
 
