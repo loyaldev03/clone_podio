@@ -111,6 +111,14 @@ angular.module('MetronicApp')
 			return payload._id;
 		}
 	}
+	auth.currentUser = function() {
+		if (auth.isLoggedIn()) {
+			var token = auth.getToken();
+			var payload = JSON.parse($window.atob(token.split('.')[1]));
+
+			return payload._id;
+		}
+	}
 
 	auth.register = function(user){
 	  return $http.post('/api/v1/register', user).success(function(data){
