@@ -153,7 +153,13 @@ angular.module('MetronicApp')
 			return err;
 		})
 	}
-
+	auth.activate = function(id) {
+		return $http.post('/api/v1/activate/'+id, {}).success(function(data){
+			auth.saveToken(data.token);
+		}).error(function(err){
+			return err;
+		})
+	}
 	auth.isActivated = function() {
 		var token = auth.getToken();
 		var payload = JSON.parse($window.atob(token.split('.')[1]));
